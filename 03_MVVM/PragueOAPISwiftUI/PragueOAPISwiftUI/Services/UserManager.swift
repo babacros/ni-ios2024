@@ -17,6 +17,11 @@ final class UserManager {
     private init() { }
     
     weak var delegate: UserManagerFlowDelegate?
+    
+    var savedParkingPlaces: [Int] {
+        get { UserDefaults.standard.value(forKey: "places") as? [Int] ?? [] }
+        set { UserDefaults.standard.setValue(newValue, forKey: "places") }
+    }
     var apiKey: String? {
         get { UserDefaults.standard.string(forKey: "apiKey") }
         set { UserDefaults.standard.set(newValue, forKey: "apiKey") }
@@ -34,5 +39,15 @@ final class UserManager {
         self.apiKey = nil
         UserDefaults.standard.setValue([], forKey: "places")
         delegate?.onLogout()
+    }
+    
+    func toggleSaved(for place: ParkingPlace) {
+        var places = savedParkingPlaces
+        if places.contains(where: { $0 == place.id }) {
+            places.removeAll { $0 == place.id }
+        } else {
+            places.append(place.id)
+        }
+        savedParkingPlaces = places
     }
 }

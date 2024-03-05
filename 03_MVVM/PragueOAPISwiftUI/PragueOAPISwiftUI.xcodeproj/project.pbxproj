@@ -43,6 +43,7 @@
 		97655DE52B9758670068CF9B /* PlaygroundDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DE42B9758670068CF9B /* PlaygroundDetailViewController.swift */; };
 		97655DE72B9758980068CF9B /* AddressMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DE62B9758980068CF9B /* AddressMapViewController.swift */; };
 		97655DE92B976B190068CF9B /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DE82B976B190068CF9B /* UserManager.swift */; };
+		97C408562B978AC200B30CD6 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C408552B978AC200B30CD6 /* Network.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +85,7 @@
 		97655DE42B9758670068CF9B /* PlaygroundDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaygroundDetailViewController.swift; sourceTree = "<group>"; };
 		97655DE62B9758980068CF9B /* AddressMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressMapViewController.swift; sourceTree = "<group>"; };
 		97655DE82B976B190068CF9B /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		97C408552B978AC200B30CD6 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,6 +233,7 @@
 				97655DC12B97446E0068CF9B /* Models */,
 				973E017B2B93EA9D0095396F /* LocationManager.swift */,
 				97655DE82B976B190068CF9B /* UserManager.swift */,
+				97C408552B978AC200B30CD6 /* Network.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				973E015E2B9380AC0095396F /* RootViewController.swift in Sources */,
 				973E017A2B93E4F30095396F /* AddressMapView.swift in Sources */,
 				973E017C2B93EA9D0095396F /* LocationManager.swift in Sources */,
+				97C408562B978AC200B30CD6 /* Network.swift in Sources */,
 				973E01812B93F0640095396F /* IdentifiablePlace.swift in Sources */,
 				973E01852B93F0910095396F /* Playground.swift in Sources */,
 				9729CD9E2B947C10005BC2D6 /* Geometry.swift in Sources */,

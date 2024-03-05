@@ -16,10 +16,6 @@ protocol ParkingListDelegate: NSObject {
 final class ParkingListViewModel {
     // MARK: - Private properties
     
-    private var savedPlaces: [Int] {
-        get { UserDefaults.standard.value(forKey: "places") as? [Int] ?? [] }
-        set { UserDefaults.standard.setValue(newValue, forKey: "places") }
-    }
     private(set) var parkingPlaces: [ParkingPlace] = [] {
         didSet {
             setVisiblePlaces()
@@ -54,17 +50,11 @@ final class ParkingListViewModel {
     }
     
     func isPlaceSaved(_ place: ParkingPlace) -> Bool {
-        savedPlaces.contains(place.id)
+        UserManager.shared.savedParkingPlaces.contains(place.id)
     }
     
     func toggleSaved(for place: ParkingPlace) {
-        var places = savedPlaces
-        if places.contains(where: { $0 == place.id }) {
-            places.removeAll { $0 == place.id }
-        } else {
-            places.append(place.id)
-        }
-        savedPlaces = places
+        UserManager.shared.toggleSaved(for: place)
         setVisiblePlaces()
     }
     
@@ -74,27 +64,19 @@ final class ParkingListViewModel {
             isLoading = true
             
             let currentLocation = LocationManager.shared.currentLocation
-            let urlString = "https://api.golemio.cz/v1/parkings?latlng=\(currentLocation.latitude)%2C\(currentLocation.longitude)&range=50000&limit=10&offset=0"
-            let url = URL(string: urlString)!
-            var urlRequest = URLRequest(url: url)
-            urlRequest.httpMethod = "GET"
-            urlRequest.allHTTPHeaderFields = [
-                "accept": "application/json; charset=utf-8",
-                "X-Access-Token": (UserDefaults.standard.value(forKey: "apiKey") as? String) ?? ""
+            var url = Network.Endpoint.parkings.url
+            let queryItems = [
+                URLQueryItem(name: "latlng", value: "\(currentLocation.latitude),\(currentLocation.longitude)"),
+                .init(name: "range", value: "50000"),
+                .init(name: "limit", value: "10"),
+                .init(name: "offset", value: "0")
             ]
+            url.queryItems = queryItems
             
-            print(
-                "⬆️ "
-                + url.absoluteString
-            )
-            
-            let (data, response) = try await URLSession.shared.data(for: urlRequest)
-            let httpResponse = response as? HTTPURLResponse
-            
-            print(
-                "⬇️ "
-                + "[\(httpResponse?.statusCode ?? -1)]: " + url.absoluteString //+ "\n"
-//                + String(data: data, encoding: .utf8)!
+            let data = try await Network.shared.performRequest(
+                url: url.url!,
+                httpMethod: .GET,
+                headers: Network.acceptJSONHeader
             )
             
             let features = try? JSONDecoder().decode(Features<APIParkingPlace>.self, from: data)
@@ -126,7 +108,7 @@ final class ParkingListViewModel {
         case .all:
             presentedParkingPlaces = parkingPlaces
         case .saved:
-            presentedParkingPlaces = parkingPlaces.filter ({ savedPlaces.contains($0.id) })
+            presentedParkingPlaces = parkingPlaces.filter ({ UserManager.shared.savedParkingPlaces.contains($0.id) })
         }
     }
 }

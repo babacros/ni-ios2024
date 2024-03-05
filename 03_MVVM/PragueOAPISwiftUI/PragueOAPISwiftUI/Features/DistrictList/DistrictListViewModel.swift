@@ -58,27 +58,21 @@ final class DistrictListViewModel {
     private func getDistricts(offset: Int = 10) async throws -> [District] {
         defer { isLoading = false }
         isLoading = true
-        let urlString = "https://api.golemio.cz/v2/citydistricts?latlng=50.10496%2C14.38957&range=50000&limit=10&offset=\(offset)"
-        let url = URL(string: urlString)!
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = "GET"
-        urlRequest.allHTTPHeaderFields = [
-            "accept": "application/json; charset=utf-8",
-            "X-Access-Token": (UserDefaults.standard.value(forKey: "apiKey") as? String) ?? ""
+
+        let currentLocation = LocationManager.shared.currentLocation
+        var url = Network.Endpoint.citydistricts.url
+        let queryItems = [
+            URLQueryItem(name: "latlng", value: "\(currentLocation.latitude),\(currentLocation.longitude)"),
+            .init(name: "range", value: "50000"),
+            .init(name: "limit", value: "10"),
+            .init(name: "offset", value: String(offset))
         ]
+        url.queryItems = queryItems
         
-        print(
-            "⬆️ "
-            + url.absoluteString
-        )
-        
-        let (data, response) = try await URLSession.shared.data(for: urlRequest)
-        let httpResponse = response as? HTTPURLResponse
-        
-        print(
-            "⬇️ "
-            + "[\(httpResponse?.statusCode ?? -1)]: " + url.absoluteString //+ "\n"
-//            + String(data: data, encoding: .utf8)!
+        let data = try await Network.shared.performRequest(
+            url: url.url!,
+            httpMethod: .GET,
+            headers: Network.acceptJSONHeader
         )
         
         let features = try? JSONDecoder().decode(Features<District>.self, from: data)
