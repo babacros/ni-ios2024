@@ -32,6 +32,8 @@
 		97655DCD2B974A5D0068CF9B /* ParkingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DCC2B974A5D0068CF9B /* ParkingListViewModel.swift */; };
 		97655DCF2B974ECE0068CF9B /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DCE2B974ECE0068CF9B /* ProfileViewModel.swift */; };
 		97655DD12B974F770068CF9B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DD02B974F770068CF9B /* LoginViewModel.swift */; };
+		97655DD32B9750B50068CF9B /* PlaygroundListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DD22B9750B50068CF9B /* PlaygroundListViewModel.swift */; };
+		97655DD62B9752FD0068CF9B /* PlaygroundDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DD52B9752FD0068CF9B /* PlaygroundDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +64,8 @@
 		97655DCC2B974A5D0068CF9B /* ParkingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingListViewModel.swift; sourceTree = "<group>"; };
 		97655DCE2B974ECE0068CF9B /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		97655DD02B974F770068CF9B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		97655DD22B9750B50068CF9B /* PlaygroundListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaygroundListViewModel.swift; sourceTree = "<group>"; };
+		97655DD52B9752FD0068CF9B /* PlaygroundDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaygroundDetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,18 +156,11 @@
 		97655DB52B97236C0068CF9B /* PlaygroundList */ = {
 			isa = PBXGroup;
 			children = (
+				97655DD42B9752E50068CF9B /* PlaygroundDetail */,
 				973E01692B938ECA0095396F /* PlaygroundListView.swift */,
-				97655DB62B97236C0068CF9B /* Views */,
+				97655DD22B9750B50068CF9B /* PlaygroundListViewModel.swift */,
 			);
 			path = PlaygroundList;
-			sourceTree = "<group>";
-		};
-		97655DB62B97236C0068CF9B /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				973E016B2B9394EC0095396F /* PlaygroundDetailView.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		97655DB72B9723740068CF9B /* Login */ = {
@@ -244,6 +241,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		97655DD42B9752E50068CF9B /* PlaygroundDetail */ = {
+			isa = PBXGroup;
+			children = (
+				973E016B2B9394EC0095396F /* PlaygroundDetailView.swift */,
+				97655DD52B9752FD0068CF9B /* PlaygroundDetailViewModel.swift */,
+			);
+			path = PlaygroundDetail;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -322,6 +328,7 @@
 				973E01812B93F0640095396F /* IdentifiablePlace.swift in Sources */,
 				973E01852B93F0910095396F /* Playground.swift in Sources */,
 				9729CD9E2B947C10005BC2D6 /* Geometry.swift in Sources */,
+				97655DD62B9752FD0068CF9B /* PlaygroundDetailViewModel.swift in Sources */,
 				973E016F2B93B5F00095396F /* DistrictListView.swift in Sources */,
 				973E016C2B9394EC0095396F /* PlaygroundDetailView.swift in Sources */,
 				973E01732B93B7750095396F /* ParkingListView.swift in Sources */,
@@ -335,6 +342,7 @@
 				973E017F2B93F0510095396F /* Features.swift in Sources */,
 				97655DCF2B974ECE0068CF9B /* ProfileViewModel.swift in Sources */,
 				97655DBE2B973DF50068CF9B /* District.swift in Sources */,
+				97655DD32B9750B50068CF9B /* PlaygroundListViewModel.swift in Sources */,
 				97655DCD2B974A5D0068CF9B /* ParkingListViewModel.swift in Sources */,
 				97655DC02B9744200068CF9B /* DistrictListViewModel.swift in Sources */,
 			);

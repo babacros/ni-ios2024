@@ -53,7 +53,11 @@ struct DistrictListView: View {
     func districtSection(district: District) -> some View {
         Section {
             NavigationLink {
-                PlaygroundListView(districtID: district.properties.slug)
+                PlaygroundListView(
+                    viewModel: .init(
+                        districtID: district.properties.slug
+                    )
+                )
             } label: {
                 Label("Hřiště", systemImage: "figure.jumprope")
                     .foregroundStyle(.pink)

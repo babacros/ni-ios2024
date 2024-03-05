@@ -9,8 +9,7 @@ import SwiftUI
 import MapKit
 
 struct PlaygroundDetailView: View {
-    let playground: Playground
-    @State var presentedPlace: IdentifiablePlace?
+    @State var viewModel: PlaygroundDetailViewModel
     
     // MARK: - Views
     
@@ -18,12 +17,12 @@ struct PlaygroundDetailView: View {
         ScrollView {
             contentView
         }
-        .sheet(item: $presentedPlace) {
+        .sheet(item: $viewModel.presentedPlace) {
             AddressMapView(place: $0) {
-                presentedPlace = nil
+                viewModel.setPresentedPlace(nil)
             }
         }
-        .navigationTitle(playground.properties.name)
+        .navigationTitle(viewModel.playground.properties.name)
         .navigationBarTitleDisplayMode(.inline)
     }
     
@@ -41,7 +40,7 @@ struct PlaygroundDetailView: View {
             .frame(height: 250)
             .frame(maxWidth: .infinity)
             .overlay {
-                AsyncImage(url: playground.properties.image.url) {
+                AsyncImage(url: viewModel.playground.properties.image.url) {
                     $0
                         .resizable()
                         .frame(maxWidth: .infinity)
@@ -60,18 +59,18 @@ struct PlaygroundDetailView: View {
             VStack(alignment: .leading, spacing: 8) {
                 Text("Popis:")
                     .bold()
-                Text(playground.properties.content)
+                Text(viewModel.playground.properties.content)
             }
             
             VStack(alignment: .leading, spacing: 8) {
                 Text("Poloha:")
                     .bold()
                 
-                if let place = playground.place {
+                if let place = viewModel.playground.place {
                     Button {
-                        presentedPlace = place
+                        viewModel.setPresentedPlace(place)
                     } label: {
-                        Text(playground.properties.address.addressFormatted)
+                        Text(viewModel.playground.properties.address.addressFormatted)
                             .multilineTextAlignment(.leading)
                     }
                 }
@@ -80,20 +79,20 @@ struct PlaygroundDetailView: View {
     }
 }
 
-#Preview {
-    NavigationStack {
-        PlaygroundDetailView(
-            playground: .init(
-                properties: .init(
-                    name: "Dejvice - Hadovka",
-                    image: .init(url: .init(string: "http://www.hristepraha.cz/images/img/5b32cbf9a9dc515aadceac62a2c231b3o.jpg")!),
-                    perex: "Nedaleko Vítězného náměstí můžete navštívit pěkný park s dětskými hřišti. Na své si mohou přijít nejen děti, ale i milovníci umění.",
-                    content: "Dětské hřiště (24) najdete v parku u stanice tramvaje Hadovka. Má 2 části. Oplocená slouží spíše menším dětem. Tvoří ji...",
-                    address: .init(addressFormatted: "Zavadilova, 16000 Hlavní město Praha-Dejvice"),
-                    id: 1
-                ),
-                geometry: .init(coordinates: [14.373285294, 50.098304749])
-            )
-        )
-    }
-}
+//#Preview {
+//    NavigationStack {
+//        PlaygroundDetailView(
+//            playground: .init(
+//                properties: .init(
+//                    name: "Dejvice - Hadovka",
+//                    image: .init(url: .init(string: "http://www.hristepraha.cz/images/img/5b32cbf9a9dc515aadceac62a2c231b3o.jpg")!),
+//                    perex: "Nedaleko Vítězného náměstí můžete navštívit pěkný park s dětskými hřišti. Na své si mohou přijít nejen děti, ale i milovníci umění.",
+//                    content: "Dětské hřiště (24) najdete v parku u stanice tramvaje Hadovka. Má 2 části. Oplocená slouží spíše menším dětem. Tvoří ji...",
+//                    address: .init(addressFormatted: "Zavadilova, 16000 Hlavní město Praha-Dejvice"),
+//                    id: 1
+//                ),
+//                geometry: .init(coordinates: [14.373285294, 50.098304749])
+//            )
+//        )
+//    }
+//}
