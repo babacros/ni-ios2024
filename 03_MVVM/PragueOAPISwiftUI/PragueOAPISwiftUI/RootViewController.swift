@@ -20,7 +20,11 @@ final class RootViewController: UIViewController {
         
         // MARK: Login
         
-        let loginViewController = LoginViewController(viewModel: .init())
+        let loginViewController = LoginViewController(
+            viewModel: .init(
+                delegate: self
+            )
+        )
         let loginNavigationController = UINavigationController(
             rootViewController: loginViewController
         )
@@ -86,11 +90,18 @@ final class RootViewController: UIViewController {
     private func updateAppState() {
         if let _ = UserDefaults.standard.value(forKey: "apiKey") {
             loginViewController.view.isHidden = true
+            tabBar.selectedIndex = 0
             tabBar?.view.isHidden = false
         } else {
             loginViewController.view.isHidden = false
             tabBar?.view.isHidden = true
         }
+    }
+}
+
+extension RootViewController: LoginFlowDelegate {
+    func onLogin() {
+        updateAppState()
     }
 }
 

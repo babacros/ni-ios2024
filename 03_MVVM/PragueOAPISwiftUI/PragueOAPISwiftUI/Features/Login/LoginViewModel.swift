@@ -8,6 +8,10 @@
 import Foundation
 import Observation
 
+protocol LoginFlowDelegate: NSObject {
+    func onLogin()
+}
+
 @Observable
 final class LoginViewModel {
     var apiKey: String? {
@@ -16,10 +20,12 @@ final class LoginViewModel {
     }
     
     var text: String
+    weak var delegate: LoginFlowDelegate?
     
     // MARK: - Initialization
     
-    init() {
+    init(delegate: LoginFlowDelegate) {
+        self.delegate = delegate
         text = LoginViewModel.Constants.myAPIKey
     }
     
@@ -27,6 +33,7 @@ final class LoginViewModel {
     
     func onSave() {
         apiKey = text
+        delegate?.onLogin()
     }
 }
 
