@@ -11,7 +11,6 @@ struct DistrictListView: View {
     @State var districts: [District] = []
     @State var isLoading = false
     @State var moreDataAvailable = true
-    @Environment(\.openURL) var openURL
     
     // MARK: - Views
     

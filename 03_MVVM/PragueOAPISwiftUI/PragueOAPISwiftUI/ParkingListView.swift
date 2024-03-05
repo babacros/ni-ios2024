@@ -11,21 +11,21 @@ import MapKit
 struct ParkingListView: View {
     enum Mode: CaseIterable {
         case all
-        case favourite
+        case saved
         
         var string: String {
             switch self {
             case .all:
                 "Vše"
-            case .favourite:
-                "Oblíbené"
+            case .saved:
+                "Uložené"
             }
         }
     }
     
     @State var parkingPlaces: [ParkingPlace] = []
     @State var presentedParkingPlaces: [ParkingPlace] = []
-    @State var favouritePlaces: [Int] = []
+    @State var savedPlaces: [Int] = []
     @State var selectedAddress: IdentifiablePlace?
     @State var selectedMode: Mode = .all
     @State var isLoading = false
@@ -74,8 +74,8 @@ struct ParkingListView: View {
                 ForEach(presentedParkingPlaces) { place in
                     ParkingCell(
                         place: place,
-                        isFavourite: favouritePlaces.contains(place.id),
-                        onToggleFavorite: { toggleFavorites(for: place) },
+                        isSaved: savedPlaces.contains(place.id),
+                        onTogglesaved: { togglesaveds(for: place) },
                         onAddressTapped: { selectedAddress = $0 }
                     )
                 }
@@ -138,18 +138,18 @@ struct ParkingListView: View {
     }
     
     func setVisiblePlaces() {
-        let favouritePlaces = UserDefaults.standard.value(forKey: "places") as? [Int] ?? []
-        self.favouritePlaces = favouritePlaces
+        let savedPlaces = UserDefaults.standard.value(forKey: "places") as? [Int] ?? []
+        self.savedPlaces = savedPlaces
         
         switch selectedMode {
         case .all:
             presentedParkingPlaces = parkingPlaces
-        case .favourite:
-            presentedParkingPlaces = parkingPlaces.filter({ favouritePlaces.contains($0.id) })
+        case .saved:
+            presentedParkingPlaces = parkingPlaces.filter({ savedPlaces.contains($0.id) })
         }
     }
     
-    func toggleFavorites(for place: ParkingPlace) {
+    func togglesaveds(for place: ParkingPlace) {
         var places = UserDefaults.standard.value(forKey: "places") as? [Int] ?? []
         if places.contains(where: { $0 == place.id }) {
             places.removeAll { $0 == place.id }
@@ -164,19 +164,19 @@ struct ParkingListView: View {
 extension ParkingListView {
     struct ParkingCell: View {
         var place: ParkingPlace
-        var onToggleFavorite: () -> Void
+        var onTogglesaved: () -> Void
         var onAddressTapped: (IdentifiablePlace) -> Void
-        var isFavourite = false
+        var isSaved = false
         
         init(
             place: ParkingPlace,
-            isFavourite: Bool,
-            onToggleFavorite: @escaping (() -> Void),
+            isSaved: Bool,
+            onTogglesaved: @escaping (() -> Void),
             onAddressTapped: @escaping (IdentifiablePlace) -> Void
         ) {
             self.place = place
-            self.isFavourite = isFavourite
-            self.onToggleFavorite = onToggleFavorite
+            self.isSaved = isSaved
+            self.onTogglesaved = onTogglesaved
             self.onAddressTapped = onAddressTapped
         }
         
@@ -207,9 +207,9 @@ extension ParkingListView {
                 Spacer()
                 
                 Button {
-                    onToggleFavorite()
+                    onTogglesaved()
                 } label: {
-                    let iconName = isFavourite ? "star.fill" : "star"
+                    let iconName = isSaved ? "star.fill" : "star"
                     Image(systemName: iconName)
                         .foregroundStyle(.yellow)
                 }
@@ -321,8 +321,8 @@ struct ParkingListView_Previews: PreviewProvider {
                 address: .init(addressFormatted: "FIT"),
                 location: nil
             ),
-            isFavourite: false,
-            onToggleFavorite: {},
+            isSaved: false,
+            onTogglesaved: {},
             onAddressTapped: { _ in }
         )
         .previewLayout(.sizeThatFits)

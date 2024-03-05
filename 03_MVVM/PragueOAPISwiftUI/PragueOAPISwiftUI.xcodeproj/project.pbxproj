@@ -78,14 +78,16 @@
 		973E015A2B9380AC0095396F /* PragueOAPISwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				97655DB12B971BA70068CF9B /* Screens */,
 				973E015B2B9380AC0095396F /* PragueOAPISwiftUIApp.swift */,
-				973E017B2B93EA9D0095396F /* LocationManager.swift */,
 				973E015D2B9380AC0095396F /* ContentView.swift */,
 				973E01772B93DBAF0095396F /* LoginView.swift */,
-				973E01742B93B7810095396F /* Profile */,
-				973E01712B93B76B0095396F /* Parking */,
 				973E01702B93B75A0095396F /* DistrictList */,
+				973E01722B93B7750095396F /* ParkingListView.swift */,
+				973E01752B93B7960095396F /* ProfileView.swift */,
+				973E01792B93E4F30095396F /* AddressMapView.swift */,
 				973E017D2B93F0480095396F /* Model */,
+				973E017B2B93EA9D0095396F /* LocationManager.swift */,
 				973E016D2B9396AC0095396F /* Info.plist */,
 				973E015F2B9380AE0095396F /* Assets.xcassets */,
 				973E01612B9380AE0095396F /* Preview Content */,
@@ -104,28 +106,11 @@
 		973E01702B93B75A0095396F /* DistrictList */ = {
 			isa = PBXGroup;
 			children = (
-				973E016B2B9394EC0095396F /* PlaygroundDetailView.swift */,
-				973E01692B938ECA0095396F /* PlaygroundListView.swift */,
 				973E016E2B93B5F00095396F /* DistrictListView.swift */,
-				973E01792B93E4F30095396F /* AddressMapView.swift */,
+				973E01692B938ECA0095396F /* PlaygroundListView.swift */,
+				973E016B2B9394EC0095396F /* PlaygroundDetailView.swift */,
 			);
 			path = DistrictList;
-			sourceTree = "<group>";
-		};
-		973E01712B93B76B0095396F /* Parking */ = {
-			isa = PBXGroup;
-			children = (
-				973E01722B93B7750095396F /* ParkingListView.swift */,
-			);
-			path = Parking;
-			sourceTree = "<group>";
-		};
-		973E01742B93B7810095396F /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				973E01752B93B7960095396F /* ProfileView.swift */,
-			);
-			path = Profile;
 			sourceTree = "<group>";
 		};
 		973E017D2B93F0480095396F /* Model */ = {
@@ -138,6 +123,13 @@
 				9729CD9D2B947C10005BC2D6 /* Geometry.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		97655DB12B971BA70068CF9B /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
