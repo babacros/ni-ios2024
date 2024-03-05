@@ -8,10 +8,10 @@
 import SwiftUI
 import Observation
 
-@MainActor
-final class DistrictListViewModel: ObservableObject {
-    @Published private(set) var districts: [District] = []
-    @Published private(set) var isLoading = false
+@Observable
+final class DistrictListViewModel {
+    private(set) var districts: [District] = []
+    private(set) var isLoading = false
     private(set) var moreDataAvailable = true
     var isProgressViewPresented: Bool {
         isLoading && districts.isEmpty
@@ -79,7 +79,7 @@ final class DistrictListViewModel: ObservableObject {
 }
 
 struct DistrictListView: View {
-    @StateObject var viewModel: DistrictListViewModel = .init()
+    @State var viewModel: DistrictListViewModel = .init()
     
     // MARK: - Views
     
