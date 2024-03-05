@@ -13,27 +13,24 @@ struct ParkingListView: View {
     // MARK: - Body
     
     var body: some View {
-        NavigationStack {
-            Picker("Mode", selection: $viewModel.selectedMode) {
-                ForEach(viewModel.screenModes, id: \.self) {
-                    Text($0.string)
+        Picker("Mode", selection: $viewModel.selectedMode) {
+            ForEach(viewModel.screenModes, id: \.self) {
+                Text($0.string)
+            }
+        }
+        .pickerStyle(.segmented)
+        .padding(.horizontal)
+        
+        contentView
+            .frame(maxHeight: .infinity)
+            .sheet(item: $viewModel.selectedAddress) {
+                AddressMapView(place: $0) {
+                    viewModel.selectAddress(nil)
                 }
             }
-            .pickerStyle(.segmented)
-            .padding(.horizontal)
-            
-            contentView
-                .frame(maxHeight: .infinity)
-                .sheet(item: $viewModel.selectedAddress) {
-                    AddressMapView(place: $0) {
-                        viewModel.selectAddress(nil)
-                    }
-                }
-                .navigationTitle("Parkovací místa")
-                .onAppear {
-                    viewModel.syncParkingPlaces()
-                }
-        }
+            .onAppear {
+                viewModel.syncParkingPlaces()
+            }
     }
     
     @ViewBuilder

@@ -20,7 +20,7 @@ final class RootViewController: UIViewController {
         
         // MARK: Login
         
-        let loginViewController = LoginViewController()
+        let loginViewController = LoginViewController(viewModel: .init())
         let loginNavigationController = UINavigationController(
             rootViewController: loginViewController
         )
@@ -52,8 +52,9 @@ final class RootViewController: UIViewController {
         // MARK: Profile
         
         let profileVC = ProfileViewController(
-            // TODO: Add onLogout param
-//            onLogout: { [weak self] in self?.updateAppState() }
+            viewModel: .init(
+                onLogout: { [weak self] in self?.updateAppState() }
+            )
         )
         let profileNavigationController = UINavigationController(
             rootViewController: profileVC

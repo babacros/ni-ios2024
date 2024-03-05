@@ -13,20 +13,8 @@ struct ProfileView: View {
     // MARK: - Body
     
     var body: some View {
-        NavigationStack {
-            contentView
-                .padding(.horizontal)
-                .toolbar {
-                    Button {
-                        viewModel.logout()
-                    } label: {
-                        Text("Odhlásit se")
-                            .frame(maxWidth: .infinity)
-                    }
-                }
-                .navigationTitle("Profil")
-                .navigationBarTitleDisplayMode(.inline)
-        }
+        contentView
+            .padding(.horizontal)
     }
     
     var contentView: some View {
@@ -37,10 +25,6 @@ struct ProfileView: View {
             Text(viewModel.apiKey ?? "")
         }
     }
-    
-    // MARK: - Helpers
-    
-
 }
 //
 //#Preview {

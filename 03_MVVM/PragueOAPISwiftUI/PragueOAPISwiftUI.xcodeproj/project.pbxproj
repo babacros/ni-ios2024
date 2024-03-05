@@ -151,10 +151,10 @@
 		97655DB32B97236C0068CF9B /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				97655DB42B97236C0068CF9B /* DistrictList */,
 				97655DB92B9723950068CF9B /* ParkingList */,
 				97655DB82B97238C0068CF9B /* Profile */,
 				97655DB72B9723740068CF9B /* Login */,
-				97655DB42B97236C0068CF9B /* DistrictList */,
 			);
 			path = Features;
 			sourceTree = "<group>";

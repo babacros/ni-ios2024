@@ -11,11 +11,8 @@ struct LoginView: View {
     @State var viewModel: LoginViewModel
     
     var body: some View {
-        NavigationStack {
-            contentView
-                .padding()
-                .navigationTitle("Přihlášení")
-        }
+        contentView
+            .padding()
     }
     
     var contentView: some View {

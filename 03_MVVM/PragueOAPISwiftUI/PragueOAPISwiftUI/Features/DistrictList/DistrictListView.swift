@@ -13,16 +13,13 @@ struct DistrictListView: View {
     // MARK: - Views
     
     var body: some View {
-        NavigationStack {
-            contentView
-                .navigationTitle("Městské části")
-                .onAppear {
-                    viewModel.onAppearFetch()
-                }
-                .refreshable {
-                    try? await viewModel.fetchFirstPage()
-                }
-        }
+        contentView
+            .onAppear {
+                viewModel.onAppearFetch()
+            }
+            .refreshable {
+                try? await viewModel.fetchFirstPage()
+            }
     }
     
     var contentView: some View {
