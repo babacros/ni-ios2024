@@ -39,24 +39,9 @@ final class PlaygroundListViewModel {
             defer { isLoading = false }
             isLoading = true
             
-            var url = Network.Endpoint.playgrounds.url
-            let queryItems = [
-                URLQueryItem(name: "districts", value: districtID),
-                .init(name: "range", value: "50000"),
-                .init(name: "limit", value: "10"),
-                .init(name: "offset", value: "0")
-            ]
-            url.queryItems = queryItems
-            
-            let data = try await Network.shared.performRequest(
-                url: url.url!,
-                httpMethod: .GET,
-                headers: Network.acceptJSONHeader
+            self.playgrounds = try await DistrictAPIService.playgrounds(
+                districtID: districtID
             )
-            
-            let features = try? JSONDecoder().decode(Features<Playground>.self, from: data)
-            print("[Received Data]: \(features?.features.map { $0.properties.name } ?? [])")
-            self.playgrounds = features?.features ?? []
         }
     }
     

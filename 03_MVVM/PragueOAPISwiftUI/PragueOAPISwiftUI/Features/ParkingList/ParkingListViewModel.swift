@@ -63,41 +63,9 @@ final class ParkingListViewModel {
             defer { isLoading = false }
             isLoading = true
             
-            let currentLocation = LocationManager.shared.currentLocation
-            var url = Network.Endpoint.parkings.url
-            let queryItems = [
-                URLQueryItem(name: "latlng", value: "\(currentLocation.latitude),\(currentLocation.longitude)"),
-                .init(name: "range", value: "50000"),
-                .init(name: "limit", value: "10"),
-                .init(name: "offset", value: "0")
-            ]
-            url.queryItems = queryItems
-            
-            let data = try await Network.shared.performRequest(
-                url: url.url!,
-                httpMethod: .GET,
-                headers: Network.acceptJSONHeader
+            self.parkingPlaces = try await ParkingAPIService.parkingPlaces(
+                currentLocation: LocationManager.shared.currentLocation
             )
-            
-            let features = try? JSONDecoder().decode(Features<APIParkingPlace>.self, from: data)
-            print("[Received Data]: \(features?.features.map { $0.properties.name } ?? [])")
-            self.parkingPlaces = features?.features.compactMap {
-                let properties = $0.properties
-                let coordinatesTupple = $0.geometry.coordinatesTupple
-                return ParkingPlace(
-                    id: properties.id,
-                    name: properties.name,
-                    numberOfFreePlaces: properties.numberOfFreePlaces,
-                    totalNumberOfPlaces: properties.totalNumberOfPlaces,
-                    parkingType: properties.parkingType.description,
-                    address: properties.address,
-                    location: .init(
-                        name: properties.name,
-                        lat: coordinatesTupple.lat,
-                        lon: coordinatesTupple.lon
-                    )
-                )
-            } ?? []
         }
     }
     

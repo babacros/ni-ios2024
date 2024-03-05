@@ -58,25 +58,10 @@ final class DistrictListViewModel {
     private func getDistricts(offset: Int = 10) async throws -> [District] {
         defer { isLoading = false }
         isLoading = true
-
-        let currentLocation = LocationManager.shared.currentLocation
-        var url = Network.Endpoint.citydistricts.url
-        let queryItems = [
-            URLQueryItem(name: "latlng", value: "\(currentLocation.latitude),\(currentLocation.longitude)"),
-            .init(name: "range", value: "50000"),
-            .init(name: "limit", value: "10"),
-            .init(name: "offset", value: String(offset))
-        ]
-        url.queryItems = queryItems
         
-        let data = try await Network.shared.performRequest(
-            url: url.url!,
-            httpMethod: .GET,
-            headers: Network.acceptJSONHeader
+        return try await DistrictAPIService.districts(
+            currentLocation: LocationManager.shared.currentLocation,
+            offset: offset
         )
-        
-        let features = try? JSONDecoder().decode(Features<District>.self, from: data)
-        print("[Received Data]: \(features?.features.map { $0.properties.name } ?? [])")
-        return features?.features ?? []
     }
 }

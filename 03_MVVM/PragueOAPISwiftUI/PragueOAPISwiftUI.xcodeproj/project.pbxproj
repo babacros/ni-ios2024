@@ -44,6 +44,7 @@
 		97655DE72B9758980068CF9B /* AddressMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DE62B9758980068CF9B /* AddressMapViewController.swift */; };
 		97655DE92B976B190068CF9B /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DE82B976B190068CF9B /* UserManager.swift */; };
 		97C408562B978AC200B30CD6 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C408552B978AC200B30CD6 /* Network.swift */; };
+		97C408582B97909300B30CD6 /* ParkingAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C408572B97909300B30CD6 /* ParkingAPIService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,7 @@
 		97655DE62B9758980068CF9B /* AddressMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressMapViewController.swift; sourceTree = "<group>"; };
 		97655DE82B976B190068CF9B /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		97C408552B978AC200B30CD6 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		97C408572B97909300B30CD6 /* ParkingAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingAPIService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +236,7 @@
 				973E017B2B93EA9D0095396F /* LocationManager.swift */,
 				97655DE82B976B190068CF9B /* UserManager.swift */,
 				97C408552B978AC200B30CD6 /* Network.swift */,
+				97C408572B97909300B30CD6 /* ParkingAPIService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 				97655DD32B9750B50068CF9B /* PlaygroundListViewModel.swift in Sources */,
 				97655DCD2B974A5D0068CF9B /* ParkingListViewModel.swift in Sources */,
 				97655DDC2B9756090068CF9B /* ParkingListViewController.swift in Sources */,
+				97C408582B97909300B30CD6 /* ParkingAPIService.swift in Sources */,
 				97655DD82B9755CC0068CF9B /* LoginViewController.swift in Sources */,
 				97655DC02B9744200068CF9B /* DistrictListViewModel.swift in Sources */,
 			);
