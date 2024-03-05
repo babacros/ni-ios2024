@@ -24,6 +24,7 @@
 		973E01812B93F0640095396F /* IdentifiablePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973E01802B93F0640095396F /* IdentifiablePlace.swift */; };
 		973E01852B93F0910095396F /* Playground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973E01842B93F0910095396F /* Playground.swift */; };
 		973E01872B93F0AD0095396F /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973E01862B93F0AD0095396F /* Address.swift */; };
+		97655DBE2B973DF50068CF9B /* District.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DBD2B973DF50068CF9B /* District.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		973E01802B93F0640095396F /* IdentifiablePlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiablePlace.swift; sourceTree = "<group>"; };
 		973E01842B93F0910095396F /* Playground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playground.swift; sourceTree = "<group>"; };
 		973E01862B93F0AD0095396F /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		97655DBD2B973DF50068CF9B /* District.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = District.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 		97655DB42B97236C0068CF9B /* DistrictList */ = {
 			isa = PBXGroup;
 			children = (
+				97655DBC2B973DEB0068CF9B /* Models */,
 				973E016E2B93B5F00095396F /* DistrictListView.swift */,
 				97655DB52B97236C0068CF9B /* PlaygroundList */,
 			);
@@ -186,6 +189,14 @@
 				973E017B2B93EA9D0095396F /* LocationManager.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		97655DBC2B973DEB0068CF9B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				97655DBD2B973DF50068CF9B /* District.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,6 +284,7 @@
 				973E01782B93DBAF0095396F /* LoginView.swift in Sources */,
 				973E016A2B938ECA0095396F /* PlaygroundListView.swift in Sources */,
 				973E017F2B93F0510095396F /* Features.swift in Sources */,
+				97655DBE2B973DF50068CF9B /* District.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

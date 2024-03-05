@@ -6,11 +6,80 @@
 //
 
 import SwiftUI
+import Observation
+
+@MainActor
+final class DistrictListViewModel: ObservableObject {
+    @Published private(set) var districts: [District] = []
+    @Published private(set) var isLoading = false
+    private(set) var moreDataAvailable = true
+    var isProgressViewPresented: Bool {
+        isLoading && districts.isEmpty
+    }
+    
+    // MARK: - Helpers
+    
+    func onAppearFetch() {
+        Task {
+            if districts.isEmpty {
+                try await fetchFirstPage()
+            }
+        }
+    }
+    
+    func fetchFirstPage() async throws {
+        districts = try await getDistricts(offset: 0)
+    }
+    
+    func fetchNextPage() {
+        Task {
+            if !districts.isEmpty {
+                try await Task.sleep(for: .seconds(0.3))
+                let districts = try await getDistricts(offset: districts.count)
+                moreDataAvailable = districts.count == 10
+                let mergedDistricts = NSOrderedSet(array: self.districts + districts)
+                self.districts = (mergedDistricts.array as? [District]) ?? []
+            }
+        }
+    }
+    
+    // MARK: - Private helpers
+    
+    private func getDistricts(offset: Int = 10) async throws -> [District] {
+        defer { isLoading = false }
+        isLoading = true
+        let urlString = "https://api.golemio.cz/v2/citydistricts?latlng=50.10496%2C14.38957&range=50000&limit=10&offset=\(offset)"
+        let url = URL(string: urlString)!
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "GET"
+        urlRequest.allHTTPHeaderFields = [
+            "accept": "application/json; charset=utf-8",
+            "X-Access-Token": (UserDefaults.standard.value(forKey: "apiKey") as? String) ?? ""
+        ]
+        
+        print(
+            "⬆️ "
+            + url.absoluteString
+        )
+        
+        let (data, response) = try await URLSession.shared.data(for: urlRequest)
+        let httpResponse = response as? HTTPURLResponse
+        
+        print(
+            "⬇️ "
+            + "[\(httpResponse?.statusCode ?? -1)]: " + url.absoluteString //+ "\n"
+//            + String(data: data, encoding: .utf8)!
+        )
+        
+        let features = try? JSONDecoder().decode(Features<District>.self, from: data)
+        print("[Received Data]: \(features?.features.map { $0.properties.name } ?? [])")
+        return features?.features ?? []
+    }
+    
+}
 
 struct DistrictListView: View {
-    @State var districts: [District] = []
-    @State var isLoading = false
-    @State var moreDataAvailable = true
+    @StateObject var viewModel: DistrictListViewModel = .init()
     
     // MARK: - Views
     
@@ -19,21 +88,17 @@ struct DistrictListView: View {
             contentView
                 .navigationTitle("Městské části")
                 .onAppear {
-                    Task {
-                        if districts.isEmpty {
-                            try await fetchFirstPage()
-                        }
-                    }
+                    viewModel.onAppearFetch()
                 }
                 .refreshable {
-                    try? await fetchFirstPage()
+                    try? await viewModel.fetchFirstPage()
                 }
         }
     }
     
     var contentView: some View {
         Group {
-            if isLoading && districts.isEmpty {
+            if viewModel.isProgressViewPresented {
                 ProgressView()
             } else {
                 districtList
@@ -43,16 +108,14 @@ struct DistrictListView: View {
     
     var districtList: some View {
         List {
-            ForEach(districts, id: \.properties.id) {
+            ForEach(viewModel.districts, id: \.properties.id) {
                 districtSection(district: $0)
             }
             
-            if moreDataAvailable {
+            if viewModel.moreDataAvailable {
                 ProgressView()
                     .onAppear {
-                        Task {
-                            try await fetchNextPage()
-                        }
+                        viewModel.fetchNextPage()
                     }
             }
         }
@@ -101,65 +164,6 @@ struct DistrictListView: View {
             Text(district.properties.name)
                 .font(.headline)
         }
-    }
-    
-    // MARK: - Helpers
-    
-    func getDistricts(offset: Int = 10) async throws -> [District] {
-        defer { isLoading = false }
-        isLoading = true
-        let urlString = "https://api.golemio.cz/v2/citydistricts?latlng=50.10496%2C14.38957&range=50000&limit=10&offset=\(offset)"
-        let url = URL(string: urlString)!
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = "GET"
-        urlRequest.allHTTPHeaderFields = [
-            "accept": "application/json; charset=utf-8",
-            "X-Access-Token": (UserDefaults.standard.value(forKey: "apiKey") as? String) ?? ""
-        ]
-        
-        print(
-            "⬆️ "
-            + url.absoluteString
-        )
-        
-        let (data, response) = try await URLSession.shared.data(for: urlRequest)
-        let httpResponse = response as? HTTPURLResponse
-        
-        print(
-            "⬇️ "
-            + "[\(httpResponse?.statusCode ?? -1)]: " + url.absoluteString //+ "\n"
-//            + String(data: data, encoding: .utf8)!
-        )
-        
-        let features = try? JSONDecoder().decode(Features<District>.self, from: data)
-        print("[Received Data]: \(features?.features.map { $0.properties.name } ?? [])")
-        return features?.features ?? []
-    }
-    
-    func fetchFirstPage() async throws {
-        districts = try await getDistricts(offset: districts.count)
-    }
-    
-    func fetchNextPage() async throws {
-        if !districts.isEmpty {
-            try await Task.sleep(for: .seconds(0.3))
-            let districts = try await getDistricts(offset: districts.count)
-            moreDataAvailable = districts.count == 10
-            let mergedDistricts = NSOrderedSet(array: self.districts + districts)
-            self.districts = (mergedDistricts.array as? [District]) ?? []
-        }
-    }
-}
-
-extension DistrictListView {
-    struct District: Decodable, Hashable {
-        let properties: DistrictProperties
-    }
-    
-    struct DistrictProperties: Decodable, Hashable {
-        let name: String
-        let id: Int
-        let slug: String
     }
 }
 
