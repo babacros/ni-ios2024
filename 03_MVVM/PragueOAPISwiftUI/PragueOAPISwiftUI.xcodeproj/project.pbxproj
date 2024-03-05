@@ -78,16 +78,12 @@
 		973E015A2B9380AC0095396F /* PragueOAPISwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				97655DB12B971BA70068CF9B /* Screens */,
 				973E015B2B9380AC0095396F /* PragueOAPISwiftUIApp.swift */,
 				973E015D2B9380AC0095396F /* ContentView.swift */,
-				973E01772B93DBAF0095396F /* LoginView.swift */,
-				973E01702B93B75A0095396F /* DistrictList */,
-				973E01722B93B7750095396F /* ParkingListView.swift */,
-				973E01752B93B7960095396F /* ProfileView.swift */,
-				973E01792B93E4F30095396F /* AddressMapView.swift */,
-				973E017D2B93F0480095396F /* Model */,
-				973E017B2B93EA9D0095396F /* LocationManager.swift */,
+				973E017D2B93F0480095396F /* Models */,
+				97655DBA2B9723A30068CF9B /* Views */,
+				97655DBB2B9723BC0068CF9B /* Services */,
+				97655DB32B97236C0068CF9B /* Features */,
 				973E016D2B9396AC0095396F /* Info.plist */,
 				973E015F2B9380AE0095396F /* Assets.xcassets */,
 				973E01612B9380AE0095396F /* Preview Content */,
@@ -103,17 +99,7 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		973E01702B93B75A0095396F /* DistrictList */ = {
-			isa = PBXGroup;
-			children = (
-				973E016E2B93B5F00095396F /* DistrictListView.swift */,
-				973E01692B938ECA0095396F /* PlaygroundListView.swift */,
-				973E016B2B9394EC0095396F /* PlaygroundDetailView.swift */,
-			);
-			path = DistrictList;
-			sourceTree = "<group>";
-		};
-		973E017D2B93F0480095396F /* Model */ = {
+		973E017D2B93F0480095396F /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				973E017E2B93F0510095396F /* Features.swift */,
@@ -122,14 +108,84 @@
 				973E01862B93F0AD0095396F /* Address.swift */,
 				9729CD9D2B947C10005BC2D6 /* Geometry.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		97655DB12B971BA70068CF9B /* Screens */ = {
+		97655DB32B97236C0068CF9B /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				97655DB92B9723950068CF9B /* ParkingList */,
+				97655DB82B97238C0068CF9B /* Profile */,
+				97655DB72B9723740068CF9B /* Login */,
+				97655DB42B97236C0068CF9B /* DistrictList */,
 			);
-			path = Screens;
+			path = Features;
+			sourceTree = "<group>";
+		};
+		97655DB42B97236C0068CF9B /* DistrictList */ = {
+			isa = PBXGroup;
+			children = (
+				973E016E2B93B5F00095396F /* DistrictListView.swift */,
+				97655DB52B97236C0068CF9B /* PlaygroundList */,
+			);
+			path = DistrictList;
+			sourceTree = "<group>";
+		};
+		97655DB52B97236C0068CF9B /* PlaygroundList */ = {
+			isa = PBXGroup;
+			children = (
+				973E01692B938ECA0095396F /* PlaygroundListView.swift */,
+				97655DB62B97236C0068CF9B /* Views */,
+			);
+			path = PlaygroundList;
+			sourceTree = "<group>";
+		};
+		97655DB62B97236C0068CF9B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				973E016B2B9394EC0095396F /* PlaygroundDetailView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		97655DB72B9723740068CF9B /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				973E01772B93DBAF0095396F /* LoginView.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		97655DB82B97238C0068CF9B /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				973E01752B93B7960095396F /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		97655DB92B9723950068CF9B /* ParkingList */ = {
+			isa = PBXGroup;
+			children = (
+				973E01722B93B7750095396F /* ParkingListView.swift */,
+			);
+			path = ParkingList;
+			sourceTree = "<group>";
+		};
+		97655DBA2B9723A30068CF9B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				973E01792B93E4F30095396F /* AddressMapView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		97655DBB2B9723BC0068CF9B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				973E017B2B93EA9D0095396F /* LocationManager.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
