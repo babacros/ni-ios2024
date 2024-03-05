@@ -97,19 +97,20 @@ struct PlaygroundListView: View {
             
             print(
                 "⬆️ "
-                + url.absoluteString + "\n"
+                + url.absoluteString
             )
             
-            let (data, _) = try await URLSession.shared.data(for: urlRequest)
-                        
-            let dataString = String(data: data, encoding: String.Encoding.utf8) ?? ""
+            let (data, response) = try await URLSession.shared.data(for: urlRequest)
+            let httpResponse = response as? HTTPURLResponse
+            
             print(
                 "⬇️ "
-                + url.absoluteString + "\n"
-                + dataString
+                + "[\(httpResponse?.statusCode ?? -1)]: " + url.absoluteString + "\n"
+                + String(data: data, encoding: .utf8)!
             )
             
             let features = try? JSONDecoder().decode(Features<Playground>.self, from: data)
+            print("[Received Data]: \(features?.features.map { $0.properties.name } ?? [])")
             self.playgrounds = features?.features ?? []
         }
     }

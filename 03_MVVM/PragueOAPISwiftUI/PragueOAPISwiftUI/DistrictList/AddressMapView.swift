@@ -58,7 +58,7 @@ struct AddressMapView: View {
         place: .init(
             name: "Name",
             lat: 50.10496,
-            long: 14.38957
+            lon: 14.38957
         ),
         onClose: {}
     )

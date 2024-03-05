@@ -25,6 +25,8 @@ struct ParkingListView: View {
     
     @State var parkingPlaces: [ParkingPlace] = []
     @State var presentedParkingPlaces: [ParkingPlace] = []
+    @State var favouritePlaces: [Int] = []
+    @State var selectedAddress: IdentifiablePlace?
     @State var selectedMode: Mode = .all
     @State var isLoading = false
     
@@ -42,6 +44,11 @@ struct ParkingListView: View {
             
             contentView
                 .frame(maxHeight: .infinity)
+                .sheet(item: $selectedAddress) {
+                    AddressMapView(place: $0) {
+                        selectedAddress = nil
+                    }
+                }
                 .navigationTitle("Parkovací místa")
                 .onAppear {
                     syncParkingPlaces()
@@ -65,9 +72,12 @@ struct ParkingListView: View {
         } else {
             List {
                 ForEach(presentedParkingPlaces) { place in
-                    ParkingCell(place: place) {
-                        setVisiblePlaces()
-                    }
+                    ParkingCell(
+                        place: place,
+                        isFavourite: favouritePlaces.contains(place.id),
+                        onToggleFavorite: { toggleFavorites(for: place) },
+                        onAddressTapped: { selectedAddress = $0 }
+                    )
                 }
             }
         }
@@ -92,29 +102,35 @@ struct ParkingListView: View {
             
             print(
                 "⬆️ "
-                + url.absoluteString + "\n"
+                + url.absoluteString
             )
             
-            let (data, _) = try await URLSession.shared.data(for: urlRequest)
+            let (data, response) = try await URLSession.shared.data(for: urlRequest)
+            let httpResponse = response as? HTTPURLResponse
             
-            let dataString = String(data: data, encoding: String.Encoding.utf8) ?? ""
             print(
                 "⬇️ "
-                + url.absoluteString + "\n"
-                + dataString
+                + "[\(httpResponse?.statusCode ?? -1)]: " + url.absoluteString //+ "\n"
+//                + String(data: data, encoding: .utf8)!
             )
             
             let features = try? JSONDecoder().decode(Features<APIParkingPlace>.self, from: data)
-            let favouritesIds: [Int] = []
+            print("[Received Data]: \(features?.features.map { $0.properties.name } ?? [])")
             self.parkingPlaces = features?.features.compactMap {
                 let properties = $0.properties
+                let coordinatesTupple = $0.geometry.coordinatesTupple
                 return ParkingPlace(
                     id: properties.id,
                     name: properties.name,
                     numberOfFreePlaces: properties.numberOfFreePlaces,
                     totalNumberOfPlaces: properties.totalNumberOfPlaces,
                     parkingType: properties.parkingType.description,
-                    isFavourite: favouritesIds.contains(properties.id)
+                    address: properties.address,
+                    location: .init(
+                        name: properties.name,
+                        lat: coordinatesTupple.lat,
+                        lon: coordinatesTupple.lon
+                    )
                 )
             } ?? []
             setVisiblePlaces()
@@ -122,13 +138,26 @@ struct ParkingListView: View {
     }
     
     func setVisiblePlaces() {
+        let favouritePlaces = UserDefaults.standard.value(forKey: "places") as? [Int] ?? []
+        self.favouritePlaces = favouritePlaces
+        
         switch selectedMode {
         case .all:
             presentedParkingPlaces = parkingPlaces
         case .favourite:
-            let places = UserDefaults.standard.value(forKey: "places") as? [Int] ?? []
-            presentedParkingPlaces = parkingPlaces.filter({ places.contains($0.id) })
+            presentedParkingPlaces = parkingPlaces.filter({ favouritePlaces.contains($0.id) })
         }
+    }
+    
+    func toggleFavorites(for place: ParkingPlace) {
+        var places = UserDefaults.standard.value(forKey: "places") as? [Int] ?? []
+        if places.contains(where: { $0 == place.id }) {
+            places.removeAll { $0 == place.id }
+        } else {
+            places.append(place.id)
+        }
+        UserDefaults.standard.setValue(places, forKey: "places")
+        setVisiblePlaces()
     }
 }
 
@@ -136,67 +165,70 @@ extension ParkingListView {
     struct ParkingCell: View {
         var place: ParkingPlace
         var onToggleFavorite: () -> Void
-        @State var isFavorite = false
+        var onAddressTapped: (IdentifiablePlace) -> Void
+        var isFavourite = false
         
         init(
             place: ParkingPlace,
-            onToggleFavorite: @escaping (() -> Void)
+            isFavourite: Bool,
+            onToggleFavorite: @escaping (() -> Void),
+            onAddressTapped: @escaping (IdentifiablePlace) -> Void
         ) {
             self.place = place
+            self.isFavourite = isFavourite
             self.onToggleFavorite = onToggleFavorite
-            isFavorite = place.isFavourite
+            self.onAddressTapped = onAddressTapped
         }
         
         // MARK: - Views
         
         var body: some View {
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 1) {
                 header
+                    .padding(.bottom, 4)
                 
-                Text("Typ: ")
-                    .bold()
-                +
                 Text(place.parkingType)
                 
                 Text("Volná místa: ")
                     .bold()
                 +
                 Text(place.freeSpacesString)
+                
+                address
             }
-            .onAppear { checkFavorites() }
         }
         
         var header: some View {
             HStack {
                 Text(place.name)
+                    .font(.headline)
+                    .foregroundStyle(.pink)
                 
                 Spacer()
                 
                 Button {
-                    toggleFavorites()
+                    onToggleFavorite()
                 } label: {
-                    let iconName = isFavorite ? "star.fill" : "star"
+                    let iconName = isFavourite ? "star.fill" : "star"
                     Image(systemName: iconName)
+                        .foregroundStyle(.yellow)
                 }
-                .tint(.yellow)
+                .buttonStyle(.plain)
             }
         }
         
-        func toggleFavorites() {
-            var places = UserDefaults.standard.value(forKey: "places") as? [Int] ?? []
-            if places.contains(where: { $0 == place.id }) {
-                places.removeAll { $0 == place.id }
-            } else {
-                places.append(place.id)
+        @ViewBuilder
+        var address: some View {
+            if let location = place.location {
+                Button {
+                    onAddressTapped(location)
+                } label: {
+                    Text(place.address.addressFormatted)
+                        .foregroundStyle(.gray)
+                        .multilineTextAlignment(.leading)
+                }
+                .buttonStyle(.plain)
             }
-            UserDefaults.standard.setValue(places, forKey: "places")
-            checkFavorites()
-            onToggleFavorite()
-        }
-        
-        func checkFavorites() {
-            let places = UserDefaults.standard.value(forKey: "places") as? [Int] ?? []
-            isFavorite = places.contains(place.id)
         }
     }
 }
@@ -208,25 +240,28 @@ extension ParkingListView {
         let numberOfFreePlaces: Int
         let totalNumberOfPlaces: Int
         let parkingType: String
-        var isFavourite: Bool
+        let address: Address
+        let location: IdentifiablePlace?
         
         var freeSpacesString: String {
             String(numberOfFreePlaces) + "/" + String(totalNumberOfPlaces)
         }
     }
     
-    struct APIParkingPlace: Codable {
+    struct APIParkingPlace: Decodable {
         let properties: Properties
+        let geometry: Geometry
     }
 }
 
 extension ParkingListView.APIParkingPlace {
-    struct Properties: Codable {
+    struct Properties: Decodable {
         let id: Int
         let name: String
         let numberOfFreePlaces: Int
         let totalNumberOfPlaces: Int
         let parkingType: ParkingType
+        let address: Address
         
         enum CodingKeys: String, CodingKey {
             case id
@@ -234,6 +269,7 @@ extension ParkingListView.APIParkingPlace {
             case numberOfFreePlaces = "num_of_free_places"
             case totalNumberOfPlaces = "total_num_of_places"
             case parkingType = "parking_type"
+            case address
         }
     }
     
@@ -251,7 +287,8 @@ extension ParkingListView.APIParkingPlace {
                 numberOfFreePlaces: 51,
                 totalNumberOfPlaces: 200,
                 parkingType: "P+R parkoviště",
-                isFavourite: false
+                address: .init(addressFormatted: "FIT"),
+                location: nil
             ),
             .init(
                 id: 1,
@@ -259,7 +296,8 @@ extension ParkingListView.APIParkingPlace {
                 numberOfFreePlaces: 51,
                 totalNumberOfPlaces: 200,
                 parkingType: "P+R parkoviště",
-                isFavourite: true
+                address: .init(addressFormatted: "FIT"),
+                location: nil
             )
         ]
     )
@@ -280,9 +318,12 @@ struct ParkingListView_Previews: PreviewProvider {
                 numberOfFreePlaces: 51,
                 totalNumberOfPlaces: 200,
                 parkingType: "P+R parkoviště",
-                isFavourite: false
+                address: .init(addressFormatted: "FIT"),
+                location: nil
             ),
-            onToggleFavorite: {}
+            isFavourite: false,
+            onToggleFavorite: {},
+            onAddressTapped: { _ in }
         )
         .previewLayout(.sizeThatFits)
     }

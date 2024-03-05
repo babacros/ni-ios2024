@@ -21,8 +21,13 @@ struct DistrictListView: View {
                 .navigationTitle("Městské části")
                 .onAppear {
                     Task {
-                        try await fetchFirstPage()
+                        if districts.isEmpty {
+                            try await fetchFirstPage()
+                        }
                     }
+                }
+                .refreshable {
+                    try? await fetchFirstPage()
                 }
         }
     }
@@ -115,18 +120,20 @@ struct DistrictListView: View {
         
         print(
             "⬆️ "
-            + url.absoluteString + "\n"
+            + url.absoluteString
         )
         
-        let (data, _) = try await URLSession.shared.data(for: urlRequest)
+        let (data, response) = try await URLSession.shared.data(for: urlRequest)
+        let httpResponse = response as? HTTPURLResponse
         
         print(
             "⬇️ "
-            + url.absoluteString + "\n"
-            //                + dataString
+            + "[\(httpResponse?.statusCode ?? -1)]: " + url.absoluteString //+ "\n"
+//            + String(data: data, encoding: .utf8)!
         )
         
         let features = try? JSONDecoder().decode(Features<District>.self, from: data)
+        print("[Received Data]: \(features?.features.map { $0.properties.name } ?? [])")
         return features?.features ?? []
     }
     
@@ -135,10 +142,13 @@ struct DistrictListView: View {
     }
     
     func fetchNextPage() async throws {
-        let districts = try await getDistricts(offset: districts.count)
-        moreDataAvailable = districts.count == 10
-        let mergedDistricts = Set(self.districts + districts)
-        self.districts = Array(mergedDistricts)
+        if !districts.isEmpty {
+            try await Task.sleep(for: .seconds(0.3))
+            let districts = try await getDistricts(offset: districts.count)
+            moreDataAvailable = districts.count == 10
+            let mergedDistricts = NSOrderedSet(array: self.districts + districts)
+            self.districts = (mergedDistricts.array as? [District]) ?? []
+        }
     }
 }
 
