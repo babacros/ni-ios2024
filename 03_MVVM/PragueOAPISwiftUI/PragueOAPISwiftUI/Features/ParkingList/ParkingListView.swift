@@ -23,11 +23,6 @@ struct ParkingListView: View {
         
         contentView
             .frame(maxHeight: .infinity)
-            .sheet(item: $viewModel.selectedAddress) {
-                AddressMapView(place: $0) {
-                    viewModel.selectAddress(nil)
-                }
-            }
             .onAppear {
                 viewModel.syncParkingPlaces()
             }
@@ -50,7 +45,7 @@ struct ParkingListView: View {
                         place: place,
                         isSaved: viewModel.isPlaceSaved(place),
                         onTogglesaved: { viewModel.toggleSaved(for: place) },
-                        onAddressTapped: { viewModel.selectAddress($0) }
+                        onAddressTapped: { viewModel.openMap($0) }
                     )
                 }
             }

@@ -23,7 +23,17 @@ final class ParkingListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        viewModel.delegate = self
+        
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Parkovací místa"
+    }
+}
+
+extension ParkingListViewController: ParkingListDelegate {
+    func onMap(location: IdentifiablePlace) {
+        let vc = AddressMapViewController(place: location)
+        let navVC = UINavigationController(rootViewController: vc)
+        navigationController?.present(navVC, animated: true)
     }
 }

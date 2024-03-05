@@ -8,6 +8,10 @@
 import Foundation
 import Observation
 
+protocol ParkingListDelegate: NSObject {
+    func onMap(location: IdentifiablePlace)
+}
+
 @Observable
 final class ParkingListViewModel {
     // MARK: - Private properties
@@ -24,10 +28,10 @@ final class ParkingListViewModel {
     private(set) var presentedParkingPlaces: [ParkingPlace] = []
     private(set) var isLoading = false
     
+    
     // MARK: - Public properties
     
     let screenModes = Mode.allCases
-    var selectedAddress: IdentifiablePlace?
     var selectedMode: Mode = .all {
         didSet {
             setVisiblePlaces()
@@ -37,10 +41,16 @@ final class ParkingListViewModel {
         presentedParkingPlaces.isEmpty
     }
     
+    weak var delegate: ParkingListDelegate?
+    
+    // MARK: - Initialization
+    
+    init() {}
+    
     // MARK: - Helpers
     
-    func selectAddress(_ address: IdentifiablePlace?) {
-        selectedAddress = address
+    func openMap(_ address: IdentifiablePlace) {
+        delegate?.onMap(location: address)
     }
     
     func isPlaceSaved(_ place: ParkingPlace) -> Bool {

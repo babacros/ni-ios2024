@@ -10,28 +10,13 @@ import MapKit
 
 struct AddressMapView: View {
     let place: IdentifiablePlace
-    var onClose: () -> Void
     
     // MARK: - Views
     
     var body: some View {
         NavigationStack {
             contentView
-                .toolbar(content: {
-                    ToolbarItem(
-                        placement: .navigation,
-                        content: {
-                            Button {
-                                onClose()
-                            } label: {
-                                Image(systemName: "xmark")
-                            }
-                        }
-                    )
-                })
                 .tint(.pink)
-                .navigationTitle(place.name)
-                .navigationBarTitleDisplayMode(.inline)
         }
     }
     
@@ -59,7 +44,6 @@ struct AddressMapView: View {
             name: "Name",
             lat: 50.10496,
             lon: 14.38957
-        ),
-        onClose: {}
+        )
     )
 }
