@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		9729CD9E2B947C10005BC2D6 /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9729CD9D2B947C10005BC2D6 /* Geometry.swift */; };
-		973E015C2B9380AC0095396F /* PragueOAPISwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973E015B2B9380AC0095396F /* PragueOAPISwiftUIApp.swift */; };
-		973E015E2B9380AC0095396F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973E015D2B9380AC0095396F /* ContentView.swift */; };
+		973E015C2B9380AC0095396F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973E015B2B9380AC0095396F /* AppDelegate.swift */; };
+		973E015E2B9380AC0095396F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973E015D2B9380AC0095396F /* RootViewController.swift */; };
 		973E01602B9380AE0095396F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 973E015F2B9380AE0095396F /* Assets.xcassets */; };
 		973E01632B9380AE0095396F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 973E01622B9380AE0095396F /* Preview Assets.xcassets */; };
 		973E016A2B938ECA0095396F /* PlaygroundListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973E01692B938ECA0095396F /* PlaygroundListView.swift */; };
@@ -34,13 +34,21 @@
 		97655DD12B974F770068CF9B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DD02B974F770068CF9B /* LoginViewModel.swift */; };
 		97655DD32B9750B50068CF9B /* PlaygroundListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DD22B9750B50068CF9B /* PlaygroundListViewModel.swift */; };
 		97655DD62B9752FD0068CF9B /* PlaygroundDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DD52B9752FD0068CF9B /* PlaygroundDetailViewModel.swift */; };
+		97655DD82B9755CC0068CF9B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DD72B9755CC0068CF9B /* LoginViewController.swift */; };
+		97655DDA2B9755F00068CF9B /* DistrictListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DD92B9755F00068CF9B /* DistrictListViewController.swift */; };
+		97655DDC2B9756090068CF9B /* ParkingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DDB2B9756090068CF9B /* ParkingListViewController.swift */; };
+		97655DDE2B9756210068CF9B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DDD2B9756210068CF9B /* ProfileViewController.swift */; };
+		97655DE12B9756510068CF9B /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DE02B9756510068CF9B /* UIViewController+Extension.swift */; };
+		97655DE32B97583A0068CF9B /* PlaygroundListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DE22B97583A0068CF9B /* PlaygroundListViewController.swift */; };
+		97655DE52B9758670068CF9B /* PlaygroundDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DE42B9758670068CF9B /* PlaygroundDetailViewController.swift */; };
+		97655DE72B9758980068CF9B /* AddressMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DE62B9758980068CF9B /* AddressMapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9729CD9D2B947C10005BC2D6 /* Geometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
 		973E01582B9380AC0095396F /* PragueOAPISwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PragueOAPISwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		973E015B2B9380AC0095396F /* PragueOAPISwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PragueOAPISwiftUIApp.swift; sourceTree = "<group>"; };
-		973E015D2B9380AC0095396F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		973E015B2B9380AC0095396F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		973E015D2B9380AC0095396F /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		973E015F2B9380AE0095396F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		973E01622B9380AE0095396F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		973E01692B938ECA0095396F /* PlaygroundListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaygroundListView.swift; sourceTree = "<group>"; };
@@ -66,6 +74,14 @@
 		97655DD02B974F770068CF9B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		97655DD22B9750B50068CF9B /* PlaygroundListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaygroundListViewModel.swift; sourceTree = "<group>"; };
 		97655DD52B9752FD0068CF9B /* PlaygroundDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaygroundDetailViewModel.swift; sourceTree = "<group>"; };
+		97655DD72B9755CC0068CF9B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		97655DD92B9755F00068CF9B /* DistrictListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictListViewController.swift; sourceTree = "<group>"; };
+		97655DDB2B9756090068CF9B /* ParkingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingListViewController.swift; sourceTree = "<group>"; };
+		97655DDD2B9756210068CF9B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		97655DE02B9756510068CF9B /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		97655DE22B97583A0068CF9B /* PlaygroundListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaygroundListViewController.swift; sourceTree = "<group>"; };
+		97655DE42B9758670068CF9B /* PlaygroundDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaygroundDetailViewController.swift; sourceTree = "<group>"; };
+		97655DE62B9758980068CF9B /* AddressMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressMapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,8 +114,9 @@
 		973E015A2B9380AC0095396F /* PragueOAPISwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				973E015B2B9380AC0095396F /* PragueOAPISwiftUIApp.swift */,
-				973E015D2B9380AC0095396F /* ContentView.swift */,
+				973E015B2B9380AC0095396F /* AppDelegate.swift */,
+				973E015D2B9380AC0095396F /* RootViewController.swift */,
+				97655DDF2B9756440068CF9B /* Extensions */,
 				973E017D2B93F0480095396F /* Models */,
 				97655DBA2B9723A30068CF9B /* Views */,
 				97655DBB2B9723BC0068CF9B /* Services */,
@@ -148,6 +165,7 @@
 				97655DBC2B973DEB0068CF9B /* Models */,
 				973E016E2B93B5F00095396F /* DistrictListView.swift */,
 				97655DBF2B9744200068CF9B /* DistrictListViewModel.swift */,
+				97655DD92B9755F00068CF9B /* DistrictListViewController.swift */,
 				97655DB52B97236C0068CF9B /* PlaygroundList */,
 			);
 			path = DistrictList;
@@ -159,6 +177,7 @@
 				97655DD42B9752E50068CF9B /* PlaygroundDetail */,
 				973E01692B938ECA0095396F /* PlaygroundListView.swift */,
 				97655DD22B9750B50068CF9B /* PlaygroundListViewModel.swift */,
+				97655DE22B97583A0068CF9B /* PlaygroundListViewController.swift */,
 			);
 			path = PlaygroundList;
 			sourceTree = "<group>";
@@ -168,6 +187,7 @@
 			children = (
 				973E01772B93DBAF0095396F /* LoginView.swift */,
 				97655DD02B974F770068CF9B /* LoginViewModel.swift */,
+				97655DD72B9755CC0068CF9B /* LoginViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -177,6 +197,7 @@
 			children = (
 				973E01752B93B7960095396F /* ProfileView.swift */,
 				97655DCE2B974ECE0068CF9B /* ProfileViewModel.swift */,
+				97655DDD2B9756210068CF9B /* ProfileViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -188,6 +209,7 @@
 				97655DC42B9745100068CF9B /* Models */,
 				973E01722B93B7750095396F /* ParkingListView.swift */,
 				97655DCC2B974A5D0068CF9B /* ParkingListViewModel.swift */,
+				97655DDB2B9756090068CF9B /* ParkingListViewController.swift */,
 			);
 			path = ParkingList;
 			sourceTree = "<group>";
@@ -196,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				973E01792B93E4F30095396F /* AddressMapView.swift */,
+				97655DE62B9758980068CF9B /* AddressMapViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -246,8 +269,17 @@
 			children = (
 				973E016B2B9394EC0095396F /* PlaygroundDetailView.swift */,
 				97655DD52B9752FD0068CF9B /* PlaygroundDetailViewModel.swift */,
+				97655DE42B9758670068CF9B /* PlaygroundDetailViewController.swift */,
 			);
 			path = PlaygroundDetail;
+			sourceTree = "<group>";
+		};
+		97655DDF2B9756440068CF9B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				97655DE02B9756510068CF9B /* UIViewController+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -322,28 +354,36 @@
 			files = (
 				97655DD12B974F770068CF9B /* LoginViewModel.swift in Sources */,
 				97655DCB2B97454F0068CF9B /* ParkingCell.swift in Sources */,
-				973E015E2B9380AC0095396F /* ContentView.swift in Sources */,
+				973E015E2B9380AC0095396F /* RootViewController.swift in Sources */,
 				973E017A2B93E4F30095396F /* AddressMapView.swift in Sources */,
 				973E017C2B93EA9D0095396F /* LocationManager.swift in Sources */,
 				973E01812B93F0640095396F /* IdentifiablePlace.swift in Sources */,
 				973E01852B93F0910095396F /* Playground.swift in Sources */,
 				9729CD9E2B947C10005BC2D6 /* Geometry.swift in Sources */,
+				97655DDA2B9755F00068CF9B /* DistrictListViewController.swift in Sources */,
 				97655DD62B9752FD0068CF9B /* PlaygroundDetailViewModel.swift in Sources */,
 				973E016F2B93B5F00095396F /* DistrictListView.swift in Sources */,
 				973E016C2B9394EC0095396F /* PlaygroundDetailView.swift in Sources */,
 				973E01732B93B7750095396F /* ParkingListView.swift in Sources */,
+				97655DDE2B9756210068CF9B /* ProfileViewController.swift in Sources */,
 				97655DC62B97451D0068CF9B /* ParkingPlace.swift in Sources */,
 				973E01872B93F0AD0095396F /* Address.swift in Sources */,
-				973E015C2B9380AC0095396F /* PragueOAPISwiftUIApp.swift in Sources */,
+				973E015C2B9380AC0095396F /* AppDelegate.swift in Sources */,
 				97655DC32B9744800068CF9B /* APIParkingPlace.swift in Sources */,
+				97655DE12B9756510068CF9B /* UIViewController+Extension.swift in Sources */,
+				97655DE32B97583A0068CF9B /* PlaygroundListViewController.swift in Sources */,
 				973E01762B93B7960095396F /* ProfileView.swift in Sources */,
 				973E01782B93DBAF0095396F /* LoginView.swift in Sources */,
+				97655DE52B9758670068CF9B /* PlaygroundDetailViewController.swift in Sources */,
 				973E016A2B938ECA0095396F /* PlaygroundListView.swift in Sources */,
 				973E017F2B93F0510095396F /* Features.swift in Sources */,
 				97655DCF2B974ECE0068CF9B /* ProfileViewModel.swift in Sources */,
 				97655DBE2B973DF50068CF9B /* District.swift in Sources */,
+				97655DE72B9758980068CF9B /* AddressMapViewController.swift in Sources */,
 				97655DD32B9750B50068CF9B /* PlaygroundListViewModel.swift in Sources */,
 				97655DCD2B974A5D0068CF9B /* ParkingListViewModel.swift in Sources */,
+				97655DDC2B9756090068CF9B /* ParkingListViewController.swift in Sources */,
+				97655DD82B9755CC0068CF9B /* LoginViewController.swift in Sources */,
 				97655DC02B9744200068CF9B /* DistrictListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -481,7 +521,6 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PragueOAPISwiftUI/Info.plist;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -510,7 +549,6 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PragueOAPISwiftUI/Info.plist;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
