@@ -23,7 +23,16 @@ final class DistrictListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        viewModel.delegate = self
+        
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Městské části"
+    }
+}
+
+extension DistrictListViewController: DistrictListFlowDelegate {
+    func onPlaygroundList(districtID: String) {
+        let vc = PlaygroundListViewController(viewModel: .init(districtID: districtID))
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

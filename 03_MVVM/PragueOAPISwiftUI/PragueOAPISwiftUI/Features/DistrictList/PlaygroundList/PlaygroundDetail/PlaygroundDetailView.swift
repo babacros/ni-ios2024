@@ -17,14 +17,6 @@ struct PlaygroundDetailView: View {
         ScrollView {
             contentView
         }
-        .sheet(item: $viewModel.presentedPlace) { _ in
-//            AddressMapView(place: $0) {
-                // TODO:
-//                viewModel.setPresentedPlace(nil)
-//            }
-        }
-        .navigationTitle(viewModel.playground.properties.name)
-        .navigationBarTitleDisplayMode(.inline)
     }
     
     var contentView: some View {

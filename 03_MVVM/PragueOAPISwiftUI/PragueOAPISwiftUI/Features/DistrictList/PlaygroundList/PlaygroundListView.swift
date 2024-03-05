@@ -16,7 +16,6 @@ struct PlaygroundListView: View {
         ScrollView {
             contentView
         }
-        .navigationTitle("Hřiště")
         .onAppear {
             viewModel.getPlaygrounds()
         }
@@ -63,11 +62,13 @@ struct PlaygroundListView: View {
             }
             
             HStack {
-                NavigationLink {
-                    PlaygroundDetailView(viewModel: .init(playground: playground))
+                Button {
+                    viewModel.onDetail(playground: playground)
                 } label: {
                     Text("Detail")
+                        .foregroundStyle(.pink)
                 }
+                .buttonStyle(.plain)
             }
             
             Divider()

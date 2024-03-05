@@ -9,12 +9,18 @@ import Foundation
 import Observation
 import MapKit
 
+protocol PlaygroundListFlowDelegate: NSObject {
+    func onDetail(playground: Playground)
+}
+
 @Observable
 final class PlaygroundListViewModel {
     private let districtID: String
     
     private(set) var playgrounds: [Playground] = []
     private(set) var isLoading = false
+    
+    weak var delegate: PlaygroundListFlowDelegate?
     
     // MARK: - Initialization
     
@@ -23,6 +29,10 @@ final class PlaygroundListViewModel {
     }
     
     // MARK: - Helpers
+    
+    func onDetail(playground: Playground) {
+        delegate?.onDetail(playground: playground)
+    }
     
     func getPlaygrounds() {
         Task {

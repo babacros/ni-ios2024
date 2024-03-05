@@ -49,16 +49,15 @@ struct DistrictListView: View {
     
     func districtSection(district: District) -> some View {
         Section {
-            NavigationLink {
-                PlaygroundListView(
-                    viewModel: .init(
-                        districtID: district.properties.slug
-                    )
+            Button {
+                viewModel.onPresentPlaygroundList(
+                    districtID: district.properties.slug
                 )
             } label: {
                 Label("Hřiště", systemImage: "figure.jumprope")
                     .foregroundStyle(.pink)
             }
+            .buttonStyle(.plain)
             
             NavigationLink {
                 Text("TODO:")

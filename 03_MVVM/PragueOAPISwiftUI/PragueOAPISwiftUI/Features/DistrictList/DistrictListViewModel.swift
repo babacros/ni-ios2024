@@ -8,6 +8,10 @@
 import Foundation
 import Observation
 
+protocol DistrictListFlowDelegate: NSObject {
+    func onPlaygroundList(districtID: String)
+}
+
 @Observable
 final class DistrictListViewModel {
     private(set) var districts: [District] = []
@@ -17,7 +21,13 @@ final class DistrictListViewModel {
         isLoading && districts.isEmpty
     }
     
+    weak var delegate: DistrictListFlowDelegate?
+    
     // MARK: - Helpers
+    
+    func onPresentPlaygroundList(districtID: String) {
+        delegate?.onPlaygroundList(districtID: districtID)
+    }
     
     func onAppearFetch() {
         Task {

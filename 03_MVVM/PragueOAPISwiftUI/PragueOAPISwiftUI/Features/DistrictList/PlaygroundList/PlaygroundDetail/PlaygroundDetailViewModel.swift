@@ -8,10 +8,15 @@
 import Foundation
 import Observation
 
+protocol PlaygroundDetailFlowDelegate: NSObject {
+    func onMap(location: IdentifiablePlace)
+}
+
 @Observable
 final class PlaygroundDetailViewModel {
     let playground: Playground
-    var presentedPlace: IdentifiablePlace?
+    
+    weak var delegate: PlaygroundDetailFlowDelegate?
     
     // MARK: - Initialization
     
@@ -21,7 +26,7 @@ final class PlaygroundDetailViewModel {
     
     // MARK: - Helpers
     
-    func setPresentedPlace(_ place: IdentifiablePlace?) {
-        presentedPlace = place
+    func setPresentedPlace(_ place: IdentifiablePlace) {
+        delegate?.onMap(location: place)
     }
 }
