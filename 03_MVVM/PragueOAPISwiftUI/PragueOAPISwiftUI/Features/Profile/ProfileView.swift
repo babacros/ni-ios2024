@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @AppStorage("apiKey") var apiKey: String?
-    var onLogout: () -> Void
+    @State var viewModel: ProfileViewModel
     
     // MARK: - Body
     
@@ -19,7 +18,7 @@ struct ProfileView: View {
                 .padding(.horizontal)
                 .toolbar {
                     Button {
-                        logout()
+                        viewModel.logout()
                     } label: {
                         Text("Odhlásit se")
                             .frame(maxWidth: .infinity)
@@ -35,19 +34,15 @@ struct ProfileView: View {
             Text("API key:")
                 .bold()
             
-            Text(apiKey ?? "")
+            Text(viewModel.apiKey ?? "")
         }
     }
     
     // MARK: - Helpers
     
-    func logout() {
-        apiKey = nil
-        UserDefaults.standard.setValue([], forKey: "places")
-        onLogout()
-    }
-}
 
-#Preview {
-    ProfileView(onLogout: { })
 }
+//
+//#Preview {
+//    ProfileView(onLogout: { })
+//}

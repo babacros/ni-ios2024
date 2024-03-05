@@ -12,7 +12,7 @@ struct ContentView: View {
     
     var body: some View {
         if (apiKey ?? "").isEmpty {
-            LoginView()
+            LoginView(viewModel: .init())
         } else {
             tabView
         }
@@ -37,9 +37,9 @@ struct ContentView: View {
                 }
             
             ProfileView(
-                onLogout: {
-                    
-                }
+                viewModel: .init(
+                    onLogout: { }
+                )
             )
             .tabItem {
                 Label(

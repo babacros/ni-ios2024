@@ -8,15 +8,12 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State var text: String = ""
+    @State var viewModel: LoginViewModel
     
     var body: some View {
         NavigationStack {
             contentView
                 .padding()
-                .onAppear {
-                    text = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUxNywiaWF0IjoxNzA5MzkyODA2LCJleHAiOjExNzA5MzkyODA2LCJpc3MiOiJnb2xlbWlvIiwianRpIjoiN2VlOTY3NDktMjMzMS00NGU3LWEwNTktNzZkZWYyZDFhOTA1In0.5k-fwhUKhVmuDEV090nXWOHONK-I5cgjyV54tzL-FXs"
-                }
                 .navigationTitle("Přihlášení")
         }
     }
@@ -25,7 +22,7 @@ struct LoginView: View {
         VStack(alignment: .leading) {
             Text("API key:")
                 .bold()
-            TextEditor(text: $text)
+            TextEditor(text: $viewModel.text)
                 .multilineTextAlignment(.leading)
                 .autocorrectionDisabled()
                 .textInputAutocapitalization(.never)
@@ -33,7 +30,7 @@ struct LoginView: View {
             Spacer()
             
             Button {
-                UserDefaults.standard.setValue(text, forKey: "apiKey")
+                viewModel.onSave()
             } label: {
                 Text("Uložit")
                     .frame(maxWidth: .infinity)
@@ -42,6 +39,6 @@ struct LoginView: View {
     }
 }
 
-#Preview {
-    LoginView()
-}
+//#Preview {
+//    LoginView()
+//}

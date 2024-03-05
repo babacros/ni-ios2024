@@ -30,6 +30,8 @@
 		97655DC62B97451D0068CF9B /* ParkingPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DC52B97451D0068CF9B /* ParkingPlace.swift */; };
 		97655DCB2B97454F0068CF9B /* ParkingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DCA2B97454F0068CF9B /* ParkingCell.swift */; };
 		97655DCD2B974A5D0068CF9B /* ParkingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DCC2B974A5D0068CF9B /* ParkingListViewModel.swift */; };
+		97655DCF2B974ECE0068CF9B /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DCE2B974ECE0068CF9B /* ProfileViewModel.swift */; };
+		97655DD12B974F770068CF9B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DD02B974F770068CF9B /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,8 @@
 		97655DC52B97451D0068CF9B /* ParkingPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingPlace.swift; sourceTree = "<group>"; };
 		97655DCA2B97454F0068CF9B /* ParkingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingCell.swift; sourceTree = "<group>"; };
 		97655DCC2B974A5D0068CF9B /* ParkingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingListViewModel.swift; sourceTree = "<group>"; };
+		97655DCE2B974ECE0068CF9B /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		97655DD02B974F770068CF9B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				973E01772B93DBAF0095396F /* LoginView.swift */,
+				97655DD02B974F770068CF9B /* LoginViewModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -174,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				973E01752B93B7960095396F /* ProfileView.swift */,
+				97655DCE2B974ECE0068CF9B /* ProfileViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -308,6 +314,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97655DD12B974F770068CF9B /* LoginViewModel.swift in Sources */,
 				97655DCB2B97454F0068CF9B /* ParkingCell.swift in Sources */,
 				973E015E2B9380AC0095396F /* ContentView.swift in Sources */,
 				973E017A2B93E4F30095396F /* AddressMapView.swift in Sources */,
@@ -326,6 +333,7 @@
 				973E01782B93DBAF0095396F /* LoginView.swift in Sources */,
 				973E016A2B938ECA0095396F /* PlaygroundListView.swift in Sources */,
 				973E017F2B93F0510095396F /* Features.swift in Sources */,
+				97655DCF2B974ECE0068CF9B /* ProfileViewModel.swift in Sources */,
 				97655DBE2B973DF50068CF9B /* District.swift in Sources */,
 				97655DCD2B974A5D0068CF9B /* ParkingListViewModel.swift in Sources */,
 				97655DC02B9744200068CF9B /* DistrictListViewModel.swift in Sources */,
