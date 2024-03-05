@@ -6,36 +6,16 @@
 //
 
 import SwiftUI
-import MapKit
 
 struct ParkingListView: View {
-    enum Mode: CaseIterable {
-        case all
-        case saved
-        
-        var string: String {
-            switch self {
-            case .all:
-                "Vše"
-            case .saved:
-                "Uložené"
-            }
-        }
-    }
-    
-    @State var parkingPlaces: [ParkingPlace] = []
-    @State var presentedParkingPlaces: [ParkingPlace] = []
-    @State var savedPlaces: [Int] = []
-    @State var selectedAddress: IdentifiablePlace?
-    @State var selectedMode: Mode = .all
-    @State var isLoading = false
+    @State var viewModel: ParkingListViewModel
     
     // MARK: - Body
     
     var body: some View {
         NavigationStack {
-            Picker("Mode", selection: $selectedMode) {
-                ForEach(Mode.allCases, id: \.self) {
+            Picker("Mode", selection: $viewModel.selectedMode) {
+                ForEach(viewModel.screenModes, id: \.self) {
                     Text($0.string)
                 }
             }
@@ -44,26 +24,23 @@ struct ParkingListView: View {
             
             contentView
                 .frame(maxHeight: .infinity)
-                .sheet(item: $selectedAddress) {
+                .sheet(item: $viewModel.selectedAddress) {
                     AddressMapView(place: $0) {
-                        selectedAddress = nil
+                        viewModel.selectAddress(nil)
                     }
                 }
                 .navigationTitle("Parkovací místa")
                 .onAppear {
-                    syncParkingPlaces()
-                }
-                .onChange(of: selectedMode) { _, _ in
-                    setVisiblePlaces()
+                    viewModel.syncParkingPlaces()
                 }
         }
     }
     
     @ViewBuilder
     var contentView: some View {
-        if isLoading {
+        if viewModel.isLoading {
             ProgressView()
-        } else if presentedParkingPlaces.isEmpty {
+        } else if viewModel.isContentUnavailableViewPresented {
             ContentUnavailableView(
                 label: {
                     Text("Žádná parkovací místa")
@@ -71,260 +48,46 @@ struct ParkingListView: View {
             )
         } else {
             List {
-                ForEach(presentedParkingPlaces) { place in
+                ForEach(viewModel.presentedParkingPlaces) { place in
                     ParkingCell(
                         place: place,
-                        isSaved: savedPlaces.contains(place.id),
-                        onTogglesaved: { togglesaveds(for: place) },
-                        onAddressTapped: { selectedAddress = $0 }
+                        isSaved: viewModel.isPlaceSaved(place),
+                        onTogglesaved: { viewModel.toggleSaved(for: place) },
+                        onAddressTapped: { viewModel.selectAddress($0) }
                     )
                 }
             }
         }
     }
-    
-    // MARK: - Helpers
-    
-    func syncParkingPlaces() {
-        Task {
-            defer { isLoading = false }
-            isLoading = true
-            
-            let currentLocation = LocationManager.shared.currentLocation
-            let urlString = "https://api.golemio.cz/v1/parkings?latlng=\(currentLocation.latitude)%2C\(currentLocation.longitude)&range=50000&limit=10&offset=0"
-            let url = URL(string: urlString)!
-            var urlRequest = URLRequest(url: url)
-            urlRequest.httpMethod = "GET"
-            urlRequest.allHTTPHeaderFields = [
-                "accept": "application/json; charset=utf-8",
-                "X-Access-Token": (UserDefaults.standard.value(forKey: "apiKey") as? String) ?? ""
-            ]
-            
-            print(
-                "⬆️ "
-                + url.absoluteString
-            )
-            
-            let (data, response) = try await URLSession.shared.data(for: urlRequest)
-            let httpResponse = response as? HTTPURLResponse
-            
-            print(
-                "⬇️ "
-                + "[\(httpResponse?.statusCode ?? -1)]: " + url.absoluteString //+ "\n"
-//                + String(data: data, encoding: .utf8)!
-            )
-            
-            let features = try? JSONDecoder().decode(Features<APIParkingPlace>.self, from: data)
-            print("[Received Data]: \(features?.features.map { $0.properties.name } ?? [])")
-            self.parkingPlaces = features?.features.compactMap {
-                let properties = $0.properties
-                let coordinatesTupple = $0.geometry.coordinatesTupple
-                return ParkingPlace(
-                    id: properties.id,
-                    name: properties.name,
-                    numberOfFreePlaces: properties.numberOfFreePlaces,
-                    totalNumberOfPlaces: properties.totalNumberOfPlaces,
-                    parkingType: properties.parkingType.description,
-                    address: properties.address,
-                    location: .init(
-                        name: properties.name,
-                        lat: coordinatesTupple.lat,
-                        lon: coordinatesTupple.lon
-                    )
-                )
-            } ?? []
-            setVisiblePlaces()
-        }
-    }
-    
-    func setVisiblePlaces() {
-        let savedPlaces = UserDefaults.standard.value(forKey: "places") as? [Int] ?? []
-        self.savedPlaces = savedPlaces
-        
-        switch selectedMode {
-        case .all:
-            presentedParkingPlaces = parkingPlaces
-        case .saved:
-            presentedParkingPlaces = parkingPlaces.filter({ savedPlaces.contains($0.id) })
-        }
-    }
-    
-    func togglesaveds(for place: ParkingPlace) {
-        var places = UserDefaults.standard.value(forKey: "places") as? [Int] ?? []
-        if places.contains(where: { $0 == place.id }) {
-            places.removeAll { $0 == place.id }
-        } else {
-            places.append(place.id)
-        }
-        UserDefaults.standard.setValue(places, forKey: "places")
-        setVisiblePlaces()
-    }
 }
-
-extension ParkingListView {
-    struct ParkingCell: View {
-        var place: ParkingPlace
-        var onTogglesaved: () -> Void
-        var onAddressTapped: (IdentifiablePlace) -> Void
-        var isSaved = false
-        
-        init(
-            place: ParkingPlace,
-            isSaved: Bool,
-            onTogglesaved: @escaping (() -> Void),
-            onAddressTapped: @escaping (IdentifiablePlace) -> Void
-        ) {
-            self.place = place
-            self.isSaved = isSaved
-            self.onTogglesaved = onTogglesaved
-            self.onAddressTapped = onAddressTapped
-        }
-        
-        // MARK: - Views
-        
-        var body: some View {
-            VStack(alignment: .leading, spacing: 1) {
-                header
-                    .padding(.bottom, 4)
-                
-                Text(place.parkingType)
-                
-                Text("Volná místa: ")
-                    .bold()
-                +
-                Text(place.freeSpacesString)
-                
-                address
-            }
-        }
-        
-        var header: some View {
-            HStack {
-                Text(place.name)
-                    .font(.headline)
-                    .foregroundStyle(.pink)
-                
-                Spacer()
-                
-                Button {
-                    onTogglesaved()
-                } label: {
-                    let iconName = isSaved ? "star.fill" : "star"
-                    Image(systemName: iconName)
-                        .foregroundStyle(.yellow)
-                }
-                .buttonStyle(.plain)
-            }
-        }
-        
-        @ViewBuilder
-        var address: some View {
-            if let location = place.location {
-                Button {
-                    onAddressTapped(location)
-                } label: {
-                    Text(place.address.addressFormatted)
-                        .foregroundStyle(.gray)
-                        .multilineTextAlignment(.leading)
-                }
-                .buttonStyle(.plain)
-            }
-        }
-    }
-}
-
-extension ParkingListView {
-    struct ParkingPlace: Identifiable, Hashable {
-        let id: Int
-        let name: String
-        let numberOfFreePlaces: Int
-        let totalNumberOfPlaces: Int
-        let parkingType: String
-        let address: Address
-        let location: IdentifiablePlace?
-        
-        var freeSpacesString: String {
-            String(numberOfFreePlaces) + "/" + String(totalNumberOfPlaces)
-        }
-    }
-    
-    struct APIParkingPlace: Decodable {
-        let properties: Properties
-        let geometry: Geometry
-    }
-}
-
-extension ParkingListView.APIParkingPlace {
-    struct Properties: Decodable {
-        let id: Int
-        let name: String
-        let numberOfFreePlaces: Int
-        let totalNumberOfPlaces: Int
-        let parkingType: ParkingType
-        let address: Address
-        
-        enum CodingKeys: String, CodingKey {
-            case id
-            case name
-            case numberOfFreePlaces = "num_of_free_places"
-            case totalNumberOfPlaces = "total_num_of_places"
-            case parkingType = "parking_type"
-            case address
-        }
-    }
-    
-    struct ParkingType: Codable {
-        let description: String
-    }
-}
-
-#Preview {
-    ParkingListView(
-        parkingPlaces: [
-            .init(
-                id: 1,
-                name: "Holešovice",
-                numberOfFreePlaces: 51,
-                totalNumberOfPlaces: 200,
-                parkingType: "P+R parkoviště",
-                address: .init(addressFormatted: "FIT"),
-                location: nil
-            ),
-            .init(
-                id: 1,
-                name: "Holešovice",
-                numberOfFreePlaces: 51,
-                totalNumberOfPlaces: 200,
-                parkingType: "P+R parkoviště",
-                address: .init(addressFormatted: "FIT"),
-                location: nil
-            )
-        ]
-    )
-}
-
-#Preview {
-    ParkingListView(
-        parkingPlaces: []
-    )
-}
-
-struct ParkingListView_Previews: PreviewProvider {
-    static var previews: some View {
-        ParkingListView.ParkingCell(
-            place: .init(
-                id: 1,
-                name: "Holešovice",
-                numberOfFreePlaces: 51,
-                totalNumberOfPlaces: 200,
-                parkingType: "P+R parkoviště",
-                address: .init(addressFormatted: "FIT"),
-                location: nil
-            ),
-            isSaved: false,
-            onTogglesaved: {},
-            onAddressTapped: { _ in }
-        )
-        .previewLayout(.sizeThatFits)
-    }
-}
+//
+//#Preview {
+//    ParkingListView(
+//        parkingPlaces: [
+//            .init(
+//                id: 1,
+//                name: "Holešovice",
+//                numberOfFreePlaces: 51,
+//                totalNumberOfPlaces: 200,
+//                parkingType: "P+R parkoviště",
+//                address: .init(addressFormatted: "FIT"),
+//                location: nil
+//            ),
+//            .init(
+//                id: 1,
+//                name: "Holešovice",
+//                numberOfFreePlaces: 51,
+//                totalNumberOfPlaces: 200,
+//                parkingType: "P+R parkoviště",
+//                address: .init(addressFormatted: "FIT"),
+//                location: nil
+//            )
+//        ]
+//    )
+//}
+//
+//#Preview {
+//    ParkingListView(
+//        parkingPlaces: []
+//    )
+//}

@@ -28,7 +28,7 @@ struct ContentView: View {
                     )
                 }
             
-            ParkingListView()
+            ParkingListView(viewModel: .init())
                 .tabItem {
                     Label(
                         title: { Text("Parkování") },
