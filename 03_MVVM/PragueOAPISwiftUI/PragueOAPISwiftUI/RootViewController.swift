@@ -9,7 +9,7 @@ import SwiftUI
 
 final class RootViewController: UIViewController {
     private weak var loginViewController: UINavigationController!
-    private weak var tabBar: UITabBarController!
+    private weak var tabBar: UITabBarController?
     
     // MARK: - Controller lifecycle
        
@@ -20,17 +20,28 @@ final class RootViewController: UIViewController {
         
         // MARK: Login
         
-        let loginViewController = LoginViewController(
-            viewModel: .init(
-                delegate: self
-            )
-        )
+        let loginViewController = LoginViewController()
         let loginNavigationController = UINavigationController(
             rootViewController: loginViewController
         )
         embedController(loginNavigationController)
         self.loginViewController = loginNavigationController
         
+        setupTabBar()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+     
+        UserManager.shared.delegate = self
+        
+        updateAppState()
+    }
+
+    // MARK: - Private helpers
+    
+    private func setupTabBar() {
+        guard tabBar == nil, UserManager.shared.isLoggedIn else { return }
         // MARK: DistrictList
         
         let districtListVC = DistrictListViewController()
@@ -55,11 +66,7 @@ final class RootViewController: UIViewController {
         
         // MARK: Profile
         
-        let profileVC = ProfileViewController(
-            viewModel: .init(
-                onLogout: { [weak self] in self?.updateAppState() }
-            )
-        )
+        let profileVC = ProfileViewController()
         let profileNavigationController = UINavigationController(
             rootViewController: profileVC
         )
@@ -79,19 +86,11 @@ final class RootViewController: UIViewController {
         self.tabBar = tabBarController
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-     
-        updateAppState()
-    }
-
-    // MARK: - Private helpers
-    
     private func updateAppState() {
-        if let _ = UserDefaults.standard.value(forKey: "apiKey") {
+        if UserManager.shared.isLoggedIn {
             loginViewController.view.isHidden = true
-            tabBar.selectedIndex = 0
             tabBar?.view.isHidden = false
+            tabBar?.selectedIndex = 0
         } else {
             loginViewController.view.isHidden = false
             tabBar?.view.isHidden = true
@@ -99,8 +98,13 @@ final class RootViewController: UIViewController {
     }
 }
 
-extension RootViewController: LoginFlowDelegate {
+extension RootViewController: UserManagerFlowDelegate {
     func onLogin() {
+        updateAppState()
+        setupTabBar()
+    }
+    
+    func onLogout() {
         updateAppState()
     }
 }

@@ -8,17 +8,8 @@
 import SwiftUI
 
 final class LoginViewController: UIViewController {
-    private let viewModel: LoginViewModel
-    
-    init(viewModel: LoginViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+    private let viewModel: LoginViewModel = .init()
+
     // MARK: - Controller lifecycle
     
     override func loadView() {

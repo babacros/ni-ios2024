@@ -42,6 +42,7 @@
 		97655DE32B97583A0068CF9B /* PlaygroundListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DE22B97583A0068CF9B /* PlaygroundListViewController.swift */; };
 		97655DE52B9758670068CF9B /* PlaygroundDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DE42B9758670068CF9B /* PlaygroundDetailViewController.swift */; };
 		97655DE72B9758980068CF9B /* AddressMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DE62B9758980068CF9B /* AddressMapViewController.swift */; };
+		97655DE92B976B190068CF9B /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DE82B976B190068CF9B /* UserManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +83,7 @@
 		97655DE22B97583A0068CF9B /* PlaygroundListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaygroundListViewController.swift; sourceTree = "<group>"; };
 		97655DE42B9758670068CF9B /* PlaygroundDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaygroundDetailViewController.swift; sourceTree = "<group>"; };
 		97655DE62B9758980068CF9B /* AddressMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressMapViewController.swift; sourceTree = "<group>"; };
+		97655DE82B976B190068CF9B /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +230,7 @@
 			children = (
 				97655DC12B97446E0068CF9B /* Models */,
 				973E017B2B93EA9D0095396F /* LocationManager.swift */,
+				97655DE82B976B190068CF9B /* UserManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				97655DDE2B9756210068CF9B /* ProfileViewController.swift in Sources */,
 				97655DC62B97451D0068CF9B /* ParkingPlace.swift in Sources */,
 				973E01872B93F0AD0095396F /* Address.swift in Sources */,
+				97655DE92B976B190068CF9B /* UserManager.swift in Sources */,
 				973E015C2B9380AC0095396F /* AppDelegate.swift in Sources */,
 				97655DC32B9744800068CF9B /* APIParkingPlace.swift in Sources */,
 				97655DE12B9756510068CF9B /* UIViewController+Extension.swift in Sources */,

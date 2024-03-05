@@ -8,32 +8,20 @@
 import Foundation
 import Observation
 
-protocol LoginFlowDelegate: NSObject {
-    func onLogin()
-}
-
 @Observable
 final class LoginViewModel {
-    var apiKey: String? {
-        get { UserDefaults.standard.string(forKey: "apiKey") }
-        set { UserDefaults.standard.set(newValue, forKey: "apiKey") }
-    }
-    
     var text: String
-    weak var delegate: LoginFlowDelegate?
     
     // MARK: - Initialization
     
-    init(delegate: LoginFlowDelegate) {
-        self.delegate = delegate
+    init() {
         text = LoginViewModel.Constants.myAPIKey
     }
     
     // MARK: - Helpers
     
     func onSave() {
-        apiKey = text
-        delegate?.onLogin()
+        UserManager.shared.login(apiKey: text)
     }
 }
 

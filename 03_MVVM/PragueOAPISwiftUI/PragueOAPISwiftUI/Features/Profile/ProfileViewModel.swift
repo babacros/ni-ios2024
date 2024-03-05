@@ -11,22 +11,13 @@ import Observation
 @Observable
 final class ProfileViewModel {
     var apiKey: String? {
-        get { UserDefaults.standard.string(forKey: "apiKey") }
-        set { UserDefaults.standard.set(newValue, forKey: "apiKey") }
+        userManager.apiKey
     }
-    private var onLogout: () -> Void
-    
-    // MARK: - Initialization
-    
-    init(onLogout: @escaping () -> Void) {
-        self.onLogout = onLogout
-    }
-    
+    private let userManager = UserManager.shared
+
     // MARK: - Helpers
     
     func logout() {
-        apiKey = nil
-        UserDefaults.standard.setValue([], forKey: "places")
-        onLogout()
+        userManager.logout()
     }
 }
