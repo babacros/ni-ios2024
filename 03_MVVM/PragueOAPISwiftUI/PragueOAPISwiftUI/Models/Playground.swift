@@ -17,7 +17,7 @@ struct Playground: Decodable, Hashable {
         return IdentifiablePlace(
             name: properties.name,
             lat: coordinates[1],
-            long: coordinates[0]
+            lon: coordinates[0]
         )
     }
 }
