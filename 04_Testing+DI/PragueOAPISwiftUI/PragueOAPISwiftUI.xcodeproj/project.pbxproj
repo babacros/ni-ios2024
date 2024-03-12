@@ -47,6 +47,8 @@
 		97655DE72B9758980068CF9B /* AddressMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DE62B9758980068CF9B /* AddressMapViewController.swift */; };
 		97655DE92B976B190068CF9B /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DE82B976B190068CF9B /* UserManager.swift */; };
 		97BEBD4F2BA07BE40078EAC3 /* PragueOAPISwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BEBD4E2BA07BE40078EAC3 /* PragueOAPISwiftUITests.swift */; };
+		97BEBD562BA07DA10078EAC3 /* ParkingPlaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BEBD552BA07DA10078EAC3 /* ParkingPlaceTests.swift */; };
+		97BEBD592BA07F200078EAC3 /* ParkingPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BEBD582BA07F200078EAC3 /* ParkingPlace.swift */; };
 		97C408562B978AC200B30CD6 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C408552B978AC200B30CD6 /* Network.swift */; };
 		97C408582B97909300B30CD6 /* ParkingAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C408572B97909300B30CD6 /* ParkingAPIService.swift */; };
 /* End PBXBuildFile section */
@@ -105,6 +107,8 @@
 		97655DE82B976B190068CF9B /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		97BEBD4C2BA07BE40078EAC3 /* PragueOAPISwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PragueOAPISwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		97BEBD4E2BA07BE40078EAC3 /* PragueOAPISwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PragueOAPISwiftUITests.swift; sourceTree = "<group>"; };
+		97BEBD552BA07DA10078EAC3 /* ParkingPlaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingPlaceTests.swift; sourceTree = "<group>"; };
+		97BEBD582BA07F200078EAC3 /* ParkingPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingPlace.swift; sourceTree = "<group>"; };
 		97C408552B978AC200B30CD6 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		97C408572B97909300B30CD6 /* ParkingAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingAPIService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -333,9 +337,19 @@
 		97BEBD4D2BA07BE40078EAC3 /* PragueOAPISwiftUITests */ = {
 			isa = PBXGroup;
 			children = (
+				97BEBD572BA07F110078EAC3 /* Mocks */,
 				97BEBD4E2BA07BE40078EAC3 /* PragueOAPISwiftUITests.swift */,
+				97BEBD552BA07DA10078EAC3 /* ParkingPlaceTests.swift */,
 			);
 			path = PragueOAPISwiftUITests;
+			sourceTree = "<group>";
+		};
+		97BEBD572BA07F110078EAC3 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				97BEBD582BA07F200078EAC3 /* ParkingPlace.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -484,6 +498,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97BEBD592BA07F200078EAC3 /* ParkingPlace.swift in Sources */,
+				97BEBD562BA07DA10078EAC3 /* ParkingPlaceTests.swift in Sources */,
 				97BEBD4F2BA07BE40078EAC3 /* PragueOAPISwiftUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
