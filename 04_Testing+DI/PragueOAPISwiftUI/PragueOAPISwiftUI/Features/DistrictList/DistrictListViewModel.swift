@@ -92,3 +92,27 @@ final class DistrictListViewModel: DistrictListViewModeling {
         )
     }
 }
+
+extension DistrictListViewModel {
+    final class Mock: DistrictListViewModeling {
+        var delegate: DistrictListFlowDelegate? = nil
+        var districts: [District]
+        var moreDataAvailable: Bool
+        var isProgressViewPresented: Bool
+        
+        init(
+            districts: [District] = [],
+            moreDataAvailable: Bool = false,
+            isProgressViewPresented: Bool = false
+        ) {
+            self.districts = districts
+            self.moreDataAvailable = moreDataAvailable
+            self.isProgressViewPresented = isProgressViewPresented
+        }
+        
+        func onPresentPlaygroundList(districtID: String) {}
+        func onAppearFetch() {}
+        func fetchFirstPage() async throws {}
+        func fetchNextPage() {}
+    }
+}

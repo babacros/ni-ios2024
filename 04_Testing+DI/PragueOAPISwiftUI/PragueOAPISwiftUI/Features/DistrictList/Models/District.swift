@@ -18,3 +18,19 @@ extension District {
         let slug: String
     }
 }
+
+extension District {
+    static func mock(
+        name: String = "Praha X",
+        id: Int = 0,
+        slug: String = "Slug"
+    ) -> District {
+        District(
+            properties: .init(
+                name: name,
+                id: id,
+                slug: slug
+            )
+        )
+    }
+}

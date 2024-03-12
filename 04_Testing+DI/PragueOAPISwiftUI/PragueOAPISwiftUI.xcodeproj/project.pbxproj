@@ -50,7 +50,6 @@
 		97BEBD562BA07DA10078EAC3 /* ParkingPlaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BEBD552BA07DA10078EAC3 /* ParkingPlaceTests.swift */; };
 		97BEBD592BA07F200078EAC3 /* ParkingPlaceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BEBD582BA07F200078EAC3 /* ParkingPlaceMock.swift */; };
 		97BEBD5B2BA07F9E0078EAC3 /* DistrictListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BEBD5A2BA07F9E0078EAC3 /* DistrictListViewModelTests.swift */; };
-		97BEBD5D2BA081E40078EAC3 /* DistrictMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BEBD5C2BA081E40078EAC3 /* DistrictMock.swift */; };
 		97BEBD612BA088FA0078EAC3 /* LocationManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BEBD602BA088FA0078EAC3 /* LocationManagerMock.swift */; };
 		97BEBD632BA08BDD0078EAC3 /* DistrictAPIServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BEBD622BA08BDD0078EAC3 /* DistrictAPIServiceMock.swift */; };
 		97BEBD652BA098260078EAC3 /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BEBD642BA098260078EAC3 /* AppDependency.swift */; };
@@ -118,7 +117,6 @@
 		97BEBD552BA07DA10078EAC3 /* ParkingPlaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingPlaceTests.swift; sourceTree = "<group>"; };
 		97BEBD582BA07F200078EAC3 /* ParkingPlaceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingPlaceMock.swift; sourceTree = "<group>"; };
 		97BEBD5A2BA07F9E0078EAC3 /* DistrictListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictListViewModelTests.swift; sourceTree = "<group>"; };
-		97BEBD5C2BA081E40078EAC3 /* DistrictMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictMock.swift; sourceTree = "<group>"; };
 		97BEBD602BA088FA0078EAC3 /* LocationManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerMock.swift; sourceTree = "<group>"; };
 		97BEBD622BA08BDD0078EAC3 /* DistrictAPIServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictAPIServiceMock.swift; sourceTree = "<group>"; };
 		97BEBD642BA098260078EAC3 /* AppDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
@@ -378,7 +376,6 @@
 			isa = PBXGroup;
 			children = (
 				97BEBD582BA07F200078EAC3 /* ParkingPlaceMock.swift */,
-				97BEBD5C2BA081E40078EAC3 /* DistrictMock.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -559,7 +556,6 @@
 				97BEBD592BA07F200078EAC3 /* ParkingPlaceMock.swift in Sources */,
 				97BEBD562BA07DA10078EAC3 /* ParkingPlaceTests.swift in Sources */,
 				97BEBD4F2BA07BE40078EAC3 /* PragueOAPISwiftUITests.swift in Sources */,
-				97BEBD5D2BA081E40078EAC3 /* DistrictMock.swift in Sources */,
 				97BEBD632BA08BDD0078EAC3 /* DistrictAPIServiceMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

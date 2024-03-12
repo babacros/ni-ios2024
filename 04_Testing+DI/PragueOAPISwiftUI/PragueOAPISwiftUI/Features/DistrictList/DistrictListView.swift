@@ -100,9 +100,24 @@ struct DistrictListView: View {
 //    DistrictListView()
 //}
 
-//struct DistrictListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DistrictListView()
-//            .previewLayout(.sizeThatFits)
-//    }
-//}
+struct DistrictListViewContent_Previews: PreviewProvider {
+    static var previews: some View {
+        DistrictListView(
+            viewModel: DistrictListViewModel.Mock(
+                districts: [.mock()]
+            )
+        )
+        .previewLayout(.sizeThatFits)
+    }
+}
+
+struct DistrictListViewLoading_Previews: PreviewProvider {
+    static var previews: some View {
+        DistrictListView(
+            viewModel: DistrictListViewModel.Mock(
+                isProgressViewPresented: true
+            )
+        )
+        .previewLayout(.sizeThatFits)
+    }
+}

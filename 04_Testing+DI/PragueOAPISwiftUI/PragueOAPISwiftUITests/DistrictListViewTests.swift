@@ -19,28 +19,12 @@ final class DistrictListViewTests: XCTestCase {
         let view = DistrictListView(viewModel: vm)
         AssertSnapshot(view)
     }
-}
-
-extension DistrictListViewModel {
-    final class Mock: DistrictListViewModeling {
-        var delegate: PragueOAPISwiftUI.DistrictListFlowDelegate? = nil
-        var districts: [District] = []
-        var moreDataAvailable: Bool = false
-        var isProgressViewPresented: Bool = false
-        
-        init(
-            districts: [District],
-            moreDataAvailable: Bool,
-            isProgressViewPresented: Bool
-        ) {
-            self.districts = districts
-            self.moreDataAvailable = moreDataAvailable
-            self.isProgressViewPresented = isProgressViewPresented
-        }
-        
-        func onPresentPlaygroundList(districtID: String) {}
-        func onAppearFetch() {}
-        func fetchFirstPage() async throws {}
-        func fetchNextPage() {}
+    
+    func testDistrictListViewContent_Previews() throws {
+        AssertSnapshot(DistrictListViewContent_Previews.previews)
+    }
+    
+    func testDistrictListViewLoading_Previews() throws {
+        AssertSnapshot(DistrictListViewLoading_Previews.previews)
     }
 }
