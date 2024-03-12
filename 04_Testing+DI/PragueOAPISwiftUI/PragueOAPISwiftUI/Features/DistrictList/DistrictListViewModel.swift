@@ -24,13 +24,13 @@ final class DistrictListViewModel {
     weak var delegate: DistrictListFlowDelegate?
     
     private let locationManager: LocationManaging
-    private let districtAPIService: DistrictAPIService
+    private let districtAPIService: DistrictAPIServicing
     
     // MARK: - Initialization
     
     init(
         locationManager: LocationManaging,
-        districtAPIService: DistrictAPIService
+        districtAPIService: DistrictAPIServicing
     ) {
         self.locationManager = locationManager
         self.districtAPIService = districtAPIService

@@ -52,6 +52,7 @@
 		97BEBD5B2BA07F9E0078EAC3 /* DistrictListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BEBD5A2BA07F9E0078EAC3 /* DistrictListViewModelTests.swift */; };
 		97BEBD5D2BA081E40078EAC3 /* DistrictMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BEBD5C2BA081E40078EAC3 /* DistrictMock.swift */; };
 		97BEBD612BA088FA0078EAC3 /* LocationManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BEBD602BA088FA0078EAC3 /* LocationManagerMock.swift */; };
+		97BEBD632BA08BDD0078EAC3 /* DistrictAPIServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BEBD622BA08BDD0078EAC3 /* DistrictAPIServiceMock.swift */; };
 		97C408562B978AC200B30CD6 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C408552B978AC200B30CD6 /* Network.swift */; };
 		97C408582B97909300B30CD6 /* ParkingAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C408572B97909300B30CD6 /* ParkingAPIService.swift */; };
 /* End PBXBuildFile section */
@@ -115,6 +116,7 @@
 		97BEBD5A2BA07F9E0078EAC3 /* DistrictListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictListViewModelTests.swift; sourceTree = "<group>"; };
 		97BEBD5C2BA081E40078EAC3 /* DistrictMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictMock.swift; sourceTree = "<group>"; };
 		97BEBD602BA088FA0078EAC3 /* LocationManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerMock.swift; sourceTree = "<group>"; };
+		97BEBD622BA08BDD0078EAC3 /* DistrictAPIServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictAPIServiceMock.swift; sourceTree = "<group>"; };
 		97C408552B978AC200B30CD6 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		97C408572B97909300B30CD6 /* ParkingAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingAPIService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -373,6 +375,7 @@
 			isa = PBXGroup;
 			children = (
 				97BEBD602BA088FA0078EAC3 /* LocationManagerMock.swift */,
+				97BEBD622BA08BDD0078EAC3 /* DistrictAPIServiceMock.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -529,6 +532,7 @@
 				97BEBD562BA07DA10078EAC3 /* ParkingPlaceTests.swift in Sources */,
 				97BEBD4F2BA07BE40078EAC3 /* PragueOAPISwiftUITests.swift in Sources */,
 				97BEBD5D2BA081E40078EAC3 /* DistrictMock.swift in Sources */,
+				97BEBD632BA08BDD0078EAC3 /* DistrictAPIServiceMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

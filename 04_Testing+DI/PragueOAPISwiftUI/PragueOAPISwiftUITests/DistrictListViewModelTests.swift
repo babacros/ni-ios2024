@@ -35,9 +35,14 @@ final class DistrictListViewModelTests: XCTestCase {
         let currentLocation = CLLocationCoordinate2D(latitude: 50.10496, longitude: 14.38957)
         
         locationManager.currentLocationReturnValue = currentLocation
-        districtAPIService.districtsReturnValue = [
-            district
-        ]
+        
+        districtAPIService.districtsReturnValue = [district]
+        var retrievedCurrentLocation: CLLocationCoordinate2D?
+        var retrievedOffset: Int?
+        districtAPIService.onDistricts = {
+            retrievedCurrentLocation = $0
+            retrievedOffset = $1
+        }
         
         // When
         try await viewModel.fetchFirstPage()
@@ -48,15 +53,8 @@ final class DistrictListViewModelTests: XCTestCase {
             viewModel.districts.first,
             district
         )
-    }
-}
-
-final class DistrictAPIServiceMock: DistrictAPIService {
-    var districtsReturnValue: [District] = []
-    override func districts(
-        currentLocation: CLLocationCoordinate2D,
-        offset: Int
-    ) async throws -> [District] {
-        districtsReturnValue
+        XCTAssertEqual(retrievedCurrentLocation?.latitude, currentLocation.latitude)
+        XCTAssertEqual(retrievedCurrentLocation?.longitude, currentLocation.longitude)
+        XCTAssertEqual(retrievedOffset, 0)
     }
 }

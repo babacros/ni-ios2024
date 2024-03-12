@@ -8,7 +8,16 @@
 import Foundation
 import CoreLocation
 
-class DistrictAPIService {
+protocol DistrictAPIServicing {
+    func districts(
+        currentLocation: CLLocationCoordinate2D,
+        offset: Int
+    ) async throws -> [District]
+    
+    func playgrounds(districtID: String) async throws -> [Playground]
+}
+
+class DistrictAPIService: DistrictAPIServicing {
     func districts(
         currentLocation: CLLocationCoordinate2D,
         offset: Int
