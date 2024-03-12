@@ -27,6 +27,10 @@ protocol DistrictListViewModeling {
 
 @Observable
 final class DistrictListViewModel: DistrictListViewModeling {
+    struct Dependencies: HasDistrictAPIService, HasLocationManager {
+        let districtAPIService: DistrictAPIServicing
+        let locationManager: LocationManaging
+    }
     private var isLoading = false
     private(set) var districts: [District] = []
     private(set) var moreDataAvailable = true
@@ -41,12 +45,9 @@ final class DistrictListViewModel: DistrictListViewModeling {
     
     // MARK: - Initialization
     
-    init(
-        locationManager: LocationManaging,
-        districtAPIService: DistrictAPIServicing
-    ) {
-        self.locationManager = locationManager
-        self.districtAPIService = districtAPIService
+    init(dependencies: Dependencies) {
+        locationManager = dependencies.locationManager
+        districtAPIService = dependencies.districtAPIService
     }
     
     // MARK: - Helpers

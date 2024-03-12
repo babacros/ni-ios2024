@@ -8,6 +8,10 @@
 import Foundation
 import CoreLocation
 
+protocol HasLocationManager {
+    var locationManager: LocationManaging { get }
+}
+
 protocol LocationManaging {
     var currentLocation: CLLocationCoordinate2D { get }
     func distanceFromCurrentLocation(for location: CLLocationCoordinate2D) -> Int

@@ -8,6 +8,10 @@
 import Foundation
 import CoreLocation
 
+protocol HasDistrictAPIService {
+    var districtAPIService: DistrictAPIServicing { get }
+}
+
 protocol DistrictAPIServicing {
     func districts(
         currentLocation: CLLocationCoordinate2D,

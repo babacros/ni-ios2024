@@ -20,8 +20,10 @@ final class DistrictListViewModelTests: XCTestCase {
         locationManager = LocationManagerMock()
         districtAPIService = DistrictAPIServiceMock()
         viewModel = DistrictListViewModel(
-            locationManager: locationManager,
-            districtAPIService: districtAPIService
+            dependencies: .init(
+                districtAPIService: districtAPIService,
+                locationManager: locationManager
+            )
         )
     }
     

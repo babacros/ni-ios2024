@@ -7,6 +7,10 @@
 
 import Foundation
 
+protocol HasNetwork {
+    var network: Networking { get }
+}
+
 protocol Networking {
     func performRequest(
         url: URL,
