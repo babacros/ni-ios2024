@@ -14,7 +14,7 @@ final class ProfileViewController: UIViewController {
     
     init() {
         self.viewModel = ProfileViewModel(
-            userManager: UserManager()
+            dependencies: .init(userManager: appDependencies.userManager)
         )
         super.init(nibName: nil, bundle: nil)
     }

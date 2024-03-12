@@ -22,12 +22,16 @@ protocol DistrictAPIServicing {
 }
 
 class DistrictAPIService: DistrictAPIServicing {
+    struct Dependencies: HasNetwork {
+        let network: Networking
+    }
+    
     private let network: Networking
     
     // MARK: - Initialization
     
-    init(network: Networking) {
-        self.network = network
+    init(dependencies: Dependencies) {
+        network = dependencies.network
     }
     
     // MARK: - Public Interface

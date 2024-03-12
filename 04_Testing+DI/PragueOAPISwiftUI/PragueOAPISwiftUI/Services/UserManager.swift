@@ -12,6 +12,10 @@ protocol UserManagerFlowDelegate: NSObject {
     func onLogout()
 }
 
+protocol HasUserManager {
+    var userManager: UserManaging { get }
+}
+
 protocol UserManaging {
     var delegate: UserManagerFlowDelegate? { get set }
     var savedParkingPlaces: [Int] { get }

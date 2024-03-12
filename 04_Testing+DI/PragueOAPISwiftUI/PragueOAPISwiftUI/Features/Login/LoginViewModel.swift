@@ -15,14 +15,18 @@ protocol LoginViewModeling {
 
 @Observable
 final class LoginViewModel: LoginViewModeling {
+    struct Dependencies: HasUserManager {
+        let userManager: UserManaging
+    }
+    
     var text: String
     
     private let userManager: UserManaging
     
     // MARK: - Initialization
     
-    init(userManager: UserManaging) {
-        self.userManager = userManager
+    init(dependencies: Dependencies) {
+        userManager = dependencies.userManager
         text = LoginViewModel.Constants.myAPIKey
     }
     

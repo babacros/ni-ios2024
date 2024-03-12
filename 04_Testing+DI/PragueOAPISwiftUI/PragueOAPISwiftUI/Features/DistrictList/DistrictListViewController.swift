@@ -51,7 +51,9 @@ extension DistrictListViewController: DistrictListFlowDelegate {
         let vc = PlaygroundListViewController(
             viewModel: PlaygroundListViewModel(
                 districtID: districtID,
-                districtAPIService: appDependencies.districtAPIService
+                dependencies: .init(
+                    districtAPIService: appDependencies.districtAPIService
+                )
             )
         )
         navigationController?.pushViewController(vc, animated: true)

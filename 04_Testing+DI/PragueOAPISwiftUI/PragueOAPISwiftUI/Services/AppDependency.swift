@@ -11,8 +11,12 @@ let appDependencies = AppDependency()
 
 final class AppDependency {
     lazy var locationManager: LocationManaging = LocationManager()
+    lazy var userManager: UserManaging = UserManager()
     lazy var districtAPIService: DistrictAPIServicing = DistrictAPIService(
-        network: network
+        dependencies: .init(network: network)
+    )
+    lazy var parkingAPIService: ParkingAPIServicing = ParkingAPIService(
+        dependencies: .init(network: network)
     )
     lazy var network: Networking = Network()
 }
@@ -20,3 +24,5 @@ final class AppDependency {
 extension AppDependency: HasDistrictAPIService { }
 extension AppDependency: HasNetwork { }
 extension AppDependency: HasLocationManager { }
+extension AppDependency: HasParkingAPIService { }
+extension AppDependency: HasUserManager { }

@@ -27,6 +27,10 @@ protocol PlaygroundListViewModeling {
 
 @Observable
 final class PlaygroundListViewModel: PlaygroundListViewModeling {
+    struct Dependencies: HasDistrictAPIService {
+        let districtAPIService: DistrictAPIServicing
+    }
+    
     private let districtID: String
     
     private(set) var playgrounds: [Playground] = []
@@ -40,10 +44,10 @@ final class PlaygroundListViewModel: PlaygroundListViewModeling {
     
     init(
         districtID: String,
-        districtAPIService: DistrictAPIServicing
+        dependencies: Dependencies
     ) {
         self.districtID = districtID
-        self.districtAPIService = districtAPIService
+        districtAPIService = dependencies.districtAPIService
     }
     
     // MARK: - Public Interface

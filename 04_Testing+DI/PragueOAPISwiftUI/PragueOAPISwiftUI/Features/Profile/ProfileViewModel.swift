@@ -15,6 +15,10 @@ protocol ProfileViewModeling {
 
 @Observable
 final class ProfileViewModel: ProfileViewModeling {
+    struct Dependencies: HasUserManager {
+        let userManager: UserManaging
+    }
+    
     var apiKey: String? {
         userManager.apiKey
     }
@@ -23,8 +27,8 @@ final class ProfileViewModel: ProfileViewModeling {
     
     // MARK: - Initialization
     
-    init(userManager: UserManaging) {
-        self.userManager = userManager
+    init(dependencies: Dependencies) {
+        userManager = dependencies.userManager
     }
     
     // MARK: - Public Interface

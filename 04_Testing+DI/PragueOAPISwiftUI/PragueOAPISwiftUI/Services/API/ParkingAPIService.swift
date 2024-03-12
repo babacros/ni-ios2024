@@ -8,19 +8,27 @@
 import Foundation
 import CoreLocation
 
+protocol HasParkingAPIService {
+    var parkingAPIService: ParkingAPIServicing { get }
+}
+
 protocol ParkingAPIServicing {
-    static func parkingPlaces(
+    func parkingPlaces(
         currentLocation: CLLocationCoordinate2D
     ) async throws -> [ParkingPlace]
 }
 
-final class ParkingAPIService {
+final class ParkingAPIService: ParkingAPIServicing {
+    struct Dependencies: HasNetwork {
+        let network: Networking
+    }
+    
     private let network: Networking
     
     // MARK: - Initialization
     
-    init(network: Networking) {
-        self.network = network
+    init(dependencies: Dependencies) {
+        network = dependencies.network
     }
     
     // MARK: - Public Interface

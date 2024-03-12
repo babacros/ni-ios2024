@@ -29,6 +29,11 @@ protocol ParkingListViewModeling {
 
 @Observable
 final class ParkingListViewModel: ParkingListViewModeling {
+    struct Dependencies: HasUserManager, HasParkingAPIService {
+        let userManager: UserManaging
+        let parkingAPIService: ParkingAPIServicing
+    }
+    
     private(set) var parkingPlaces: [ParkingPlace] = [] {
         didSet {
             setVisiblePlaces()
@@ -52,17 +57,14 @@ final class ParkingListViewModel: ParkingListViewModeling {
     
     weak var delegate: ParkingListDelegate?
     
-    let userManager: UserManager
-    let parkingAPIService: ParkingAPIService
+    let userManager: UserManaging
+    let parkingAPIService: ParkingAPIServicing
     
     // MARK: - Initialization
     
-    init(
-        userManager: UserManager,
-        parkingAPIService: ParkingAPIService
-    ) {
-        self.userManager = userManager
-        self.parkingAPIService = parkingAPIService
+    init(dependencies: Dependencies) {
+        userManager = dependencies.userManager
+        parkingAPIService = dependencies.parkingAPIService
     }
     
     // MARK: - Helpers
