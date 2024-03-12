@@ -13,7 +13,7 @@ final class LoginViewController: UIViewController {
     // MARK: - Initialization
     
     init() {
-        self.viewModel = LoginViewModel()
+        self.viewModel = LoginViewModel(userManager: UserManager())
         super.init(nibName: nil, bundle: nil)
     }
     

@@ -8,20 +8,28 @@
 import Foundation
 import Observation
 
+protocol LoginViewModeling {
+    var text: String { get set }
+    func onSave()
+}
+
 @Observable
-final class LoginViewModel {
+final class LoginViewModel: LoginViewModeling {
     var text: String
+    
+    private let userManager: UserManaging
     
     // MARK: - Initialization
     
-    init() {
+    init(userManager: UserManaging) {
+        self.userManager = userManager
         text = LoginViewModel.Constants.myAPIKey
     }
     
-    // MARK: - Helpers
+    // MARK: - Public Interface
     
     func onSave() {
-        UserManager.shared.login(apiKey: text)
+        userManager.login(apiKey: text)
     }
 }
 

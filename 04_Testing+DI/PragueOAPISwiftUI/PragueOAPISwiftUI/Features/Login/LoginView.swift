@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State var viewModel: LoginViewModel
+    @State var viewModel: LoginViewModeling
     
     // MARK: - Body
     

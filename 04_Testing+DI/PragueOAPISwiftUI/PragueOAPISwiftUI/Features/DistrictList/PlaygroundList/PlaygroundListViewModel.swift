@@ -13,8 +13,20 @@ protocol PlaygroundListFlowDelegate: NSObject {
     func onDetail(playground: Playground)
 }
 
+protocol PlaygroundListViewModeling {
+    var playgrounds: [Playground] { get }
+    var isLoading: Bool { get }
+    
+    // Not nice - gonna be fixed during 5. lecture
+    var delegate: PlaygroundListFlowDelegate? { get set }
+ 
+    func onDetail(playground: Playground)
+    func getPlaygrounds()
+    func distanceFromCurrentLocation(for location: CLLocationCoordinate2D) -> String
+}
+
 @Observable
-final class PlaygroundListViewModel {
+final class PlaygroundListViewModel: PlaygroundListViewModeling {
     private let districtID: String
     
     private(set) var playgrounds: [Playground] = []
@@ -22,13 +34,19 @@ final class PlaygroundListViewModel {
     
     weak var delegate: PlaygroundListFlowDelegate?
     
+    private let districtAPIService: DistrictAPIServicing
+    
     // MARK: - Initialization
     
-    init(districtID: String) {
+    init(
+        districtID: String,
+        districtAPIService: DistrictAPIServicing
+    ) {
         self.districtID = districtID
+        self.districtAPIService = districtAPIService
     }
     
-    // MARK: - Helpers
+    // MARK: - Public Interface
     
     func onDetail(playground: Playground) {
         delegate?.onDetail(playground: playground)
@@ -39,7 +57,7 @@ final class PlaygroundListViewModel {
             defer { isLoading = false }
             isLoading = true
             
-            self.playgrounds = try await DistrictAPIService().playgrounds(
+            self.playgrounds = try await districtAPIService.playgrounds(
                 districtID: districtID
             )
         }

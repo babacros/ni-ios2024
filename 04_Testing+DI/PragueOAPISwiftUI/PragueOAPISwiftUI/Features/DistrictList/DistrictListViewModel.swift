@@ -12,10 +12,23 @@ protocol DistrictListFlowDelegate: NSObject {
     func onPlaygroundList(districtID: String)
 }
 
+protocol DistrictListViewModeling {
+    // Not nice - gonna be fixed during 5. lecture
+    var delegate: DistrictListFlowDelegate? { get set }
+    var districts: [District] { get }
+    var moreDataAvailable: Bool { get }
+    var isProgressViewPresented: Bool { get }
+    
+    func onPresentPlaygroundList(districtID: String)
+    func onAppearFetch()
+    func fetchFirstPage() async throws
+    func fetchNextPage()
+}
+
 @Observable
-final class DistrictListViewModel {
+final class DistrictListViewModel: DistrictListViewModeling {
+    private var isLoading = false
     private(set) var districts: [District] = []
-    private(set) var isLoading = false
     private(set) var moreDataAvailable = true
     var isProgressViewPresented: Bool {
         isLoading && districts.isEmpty

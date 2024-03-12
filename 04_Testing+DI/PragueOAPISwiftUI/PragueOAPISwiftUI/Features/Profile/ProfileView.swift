@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @State var viewModel: ProfileViewModel
+    @State var viewModel: ProfileViewModeling
     
     // MARK: - Body
     

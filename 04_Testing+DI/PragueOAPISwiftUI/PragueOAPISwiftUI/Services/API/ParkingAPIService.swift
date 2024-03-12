@@ -8,8 +8,24 @@
 import Foundation
 import CoreLocation
 
-final class ParkingAPIService {
+protocol ParkingAPIServicing {
     static func parkingPlaces(
+        currentLocation: CLLocationCoordinate2D
+    ) async throws -> [ParkingPlace]
+}
+
+final class ParkingAPIService {
+    private let network: Networking
+    
+    // MARK: - Initialization
+    
+    init(network: Networking) {
+        self.network = network
+    }
+    
+    // MARK: - Public Interface
+    
+    func parkingPlaces(
         currentLocation: CLLocationCoordinate2D
     ) async throws -> [ParkingPlace] {
         var url = Network.Endpoint.parkings.url
@@ -21,7 +37,7 @@ final class ParkingAPIService {
         ]
         url.queryItems = queryItems
         
-        let data = try await Network.shared.performRequest(
+        let data = try await network.performRequest(
             url: url.url!,
             httpMethod: .GET,
             headers: Network.acceptJSONHeader

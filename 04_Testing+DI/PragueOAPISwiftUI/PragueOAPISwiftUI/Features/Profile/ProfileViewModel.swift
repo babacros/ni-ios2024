@@ -8,21 +8,26 @@
 import Foundation
 import Observation
 
+protocol ProfileViewModeling {
+    var apiKey: String? { get }
+    func logout()
+}
+
 @Observable
-final class ProfileViewModel {
+final class ProfileViewModel: ProfileViewModeling {
     var apiKey: String? {
         userManager.apiKey
     }
     
-    private let userManager = UserManager.shared
+    private let userManager: UserManaging
     
     // MARK: - Initialization
     
-    init() {
-        
+    init(userManager: UserManaging) {
+        self.userManager = userManager
     }
-
-    // MARK: - Helpers
+    
+    // MARK: - Public Interface
     
     func logout() {
         userManager.logout()

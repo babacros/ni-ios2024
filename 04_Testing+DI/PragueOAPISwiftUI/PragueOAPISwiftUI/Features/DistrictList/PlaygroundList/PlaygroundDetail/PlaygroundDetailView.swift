@@ -9,7 +9,7 @@ import SwiftUI
 import MapKit
 
 struct PlaygroundDetailView: View {
-    @State var viewModel: PlaygroundDetailViewModel
+    @State var viewModel: PlaygroundDetailViewModeling
     
     // MARK: - Body
     

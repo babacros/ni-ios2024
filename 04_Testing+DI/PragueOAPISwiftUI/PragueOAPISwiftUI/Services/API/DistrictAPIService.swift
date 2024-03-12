@@ -18,6 +18,16 @@ protocol DistrictAPIServicing {
 }
 
 class DistrictAPIService: DistrictAPIServicing {
+    private let network: Networking
+    
+    // MARK: - Initialization
+    
+    init(network: Networking) {
+        self.network = network
+    }
+    
+    // MARK: - Public Interface
+    
     func districts(
         currentLocation: CLLocationCoordinate2D,
         offset: Int
@@ -31,7 +41,7 @@ class DistrictAPIService: DistrictAPIServicing {
         ]
         url.queryItems = queryItems
         
-        let data = try await Network.shared.performRequest(
+        let data = try await network.performRequest(
             url: url.url!,
             httpMethod: .GET,
             headers: Network.acceptJSONHeader
@@ -52,7 +62,7 @@ class DistrictAPIService: DistrictAPIServicing {
         ]
         url.queryItems = queryItems
         
-        let data = try await Network.shared.performRequest(
+        let data = try await network.performRequest(
             url: url.url!,
             httpMethod: .GET,
             headers: Network.acceptJSONHeader

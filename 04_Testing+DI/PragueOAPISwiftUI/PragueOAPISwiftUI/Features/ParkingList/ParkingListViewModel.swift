@@ -12,10 +12,23 @@ protocol ParkingListDelegate: NSObject {
     func onMap(location: IdentifiablePlace)
 }
 
-@Observable
-final class ParkingListViewModel {
-    // MARK: - Private properties
+protocol ParkingListViewModeling {
+    var delegate: ParkingListDelegate? { get set }
     
+    var parkingPlaces: [ParkingPlace] { get }
+    var presentedParkingPlaces: [ParkingPlace] { get }
+    var isLoading: Bool { get }
+    var selectedMode: ParkingListViewModel.Mode { get set }
+    var isContentUnavailableViewPresented: Bool { get }
+    
+    func openMap(_ address: IdentifiablePlace)
+    func isPlaceSaved(_ place: ParkingPlace) -> Bool
+    func toggleSaved(for place: ParkingPlace)
+    func syncParkingPlaces()
+}
+
+@Observable
+final class ParkingListViewModel: ParkingListViewModeling {
     private(set) var parkingPlaces: [ParkingPlace] = [] {
         didSet {
             setVisiblePlaces()
@@ -39,9 +52,18 @@ final class ParkingListViewModel {
     
     weak var delegate: ParkingListDelegate?
     
+    let userManager: UserManager
+    let parkingAPIService: ParkingAPIService
+    
     // MARK: - Initialization
     
-    init() {}
+    init(
+        userManager: UserManager,
+        parkingAPIService: ParkingAPIService
+    ) {
+        self.userManager = userManager
+        self.parkingAPIService = parkingAPIService
+    }
     
     // MARK: - Helpers
     
@@ -50,11 +72,11 @@ final class ParkingListViewModel {
     }
     
     func isPlaceSaved(_ place: ParkingPlace) -> Bool {
-        UserManager.shared.savedParkingPlaces.contains(place.id)
+        userManager.savedParkingPlaces.contains(place.id)
     }
     
     func toggleSaved(for place: ParkingPlace) {
-        UserManager.shared.toggleSaved(for: place)
+        userManager.toggleSaved(for: place)
         setVisiblePlaces()
     }
     
@@ -63,7 +85,7 @@ final class ParkingListViewModel {
             defer { isLoading = false }
             isLoading = true
             
-            self.parkingPlaces = try await ParkingAPIService.parkingPlaces(
+            self.parkingPlaces = try await parkingAPIService.parkingPlaces(
                 currentLocation: LocationManager().currentLocation
             )
         }
@@ -76,7 +98,8 @@ final class ParkingListViewModel {
         case .all:
             presentedParkingPlaces = parkingPlaces
         case .saved:
-            presentedParkingPlaces = parkingPlaces.filter ({ UserManager.shared.savedParkingPlaces.contains($0.id) })
+            presentedParkingPlaces = parkingPlaces.filter ({ [weak self] in self?.userManager.savedParkingPlaces.contains($0.id) ?? false
+            })
         }
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PlaygroundListView: View {
-    @State var viewModel: PlaygroundListViewModel
+    @State var viewModel: PlaygroundListViewModeling
     
     // MARK: - Body
     

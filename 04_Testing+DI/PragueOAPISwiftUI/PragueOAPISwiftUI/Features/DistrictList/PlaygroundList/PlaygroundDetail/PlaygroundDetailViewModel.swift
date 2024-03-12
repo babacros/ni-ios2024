@@ -12,8 +12,15 @@ protocol PlaygroundDetailFlowDelegate: NSObject {
     func onMap(location: IdentifiablePlace)
 }
 
+protocol PlaygroundDetailViewModeling {
+    // Not nice
+    var delegate: PlaygroundDetailFlowDelegate? { get set }
+    var playground: Playground { get }
+    func setPresentedPlace(_ place: IdentifiablePlace)
+}
+
 @Observable
-final class PlaygroundDetailViewModel {
+final class PlaygroundDetailViewModel: PlaygroundDetailViewModeling {
     let playground: Playground
     
     weak var delegate: PlaygroundDetailFlowDelegate?

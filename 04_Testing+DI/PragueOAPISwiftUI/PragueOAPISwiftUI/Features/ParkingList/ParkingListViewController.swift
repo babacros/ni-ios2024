@@ -8,12 +8,17 @@
 import SwiftUI
 
 final class ParkingListViewController: UIViewController {
-    private let viewModel: ParkingListViewModel
+    private var viewModel: ParkingListViewModeling
     
     // MARK: - Initialization
     
     init() {
-        self.viewModel = ParkingListViewModel()
+        self.viewModel = ParkingListViewModel(
+            userManager: UserManager(),
+            parkingAPIService: ParkingAPIService(
+                network: Network()
+            )
+        )
         super.init(nibName: nil, bundle: nil)
     }
     

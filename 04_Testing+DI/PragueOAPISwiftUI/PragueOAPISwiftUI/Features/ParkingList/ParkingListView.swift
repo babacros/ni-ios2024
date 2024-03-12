@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct ParkingListView: View {
-    @State var viewModel: ParkingListViewModel
+    @State var viewModel: ParkingListViewModeling
     
     // MARK: - Body
     
     var body: some View {
         Picker("Mode", selection: $viewModel.selectedMode) {
-            ForEach(viewModel.screenModes, id: \.self) {
+            ForEach(ParkingListViewModel.Mode.allCases, id: \.self) {
                 Text($0.string)
             }
         }

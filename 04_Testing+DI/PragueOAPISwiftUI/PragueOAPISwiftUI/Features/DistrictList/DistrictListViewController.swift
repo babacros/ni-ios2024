@@ -8,14 +8,18 @@
 import SwiftUI
 
 final class DistrictListViewController: UIViewController {
-    private let viewModel: DistrictListViewModel
+    private var viewModel: DistrictListViewModeling
+    private let districtAPIService: DistrictAPIServicing
     
     // MARK: - Initialization
     
     init() {
+        districtAPIService = DistrictAPIService(
+            network: Network()
+        )
         self.viewModel = DistrictListViewModel(
             locationManager: LocationManager(),
-            districtAPIService: DistrictAPIService()
+            districtAPIService: districtAPIService
         )
         super.init(nibName: nil, bundle: nil)
     }
@@ -46,7 +50,12 @@ final class DistrictListViewController: UIViewController {
 
 extension DistrictListViewController: DistrictListFlowDelegate {
     func onPlaygroundList(districtID: String) {
-        let vc = PlaygroundListViewController(viewModel: .init(districtID: districtID))
+        let vc = PlaygroundListViewController(
+            viewModel: PlaygroundListViewModel(
+                districtID: districtID,
+                districtAPIService: districtAPIService
+            )
+        )
         navigationController?.pushViewController(vc, animated: true)
     }
 }

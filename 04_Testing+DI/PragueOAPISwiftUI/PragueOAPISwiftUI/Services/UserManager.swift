@@ -12,7 +12,19 @@ protocol UserManagerFlowDelegate: NSObject {
     func onLogout()
 }
 
-final class UserManager {
+protocol UserManaging {
+    var delegate: UserManagerFlowDelegate? { get set }
+    var savedParkingPlaces: [Int] { get }
+    var apiKey: String? { get }
+    var isLoggedIn: Bool { get }
+    
+    func login(apiKey: String)
+    func logout()
+    func toggleSaved(for place: ParkingPlace)
+}
+
+// TODO: Extract UserDefault to separated Manager
+final class UserManager: UserManaging {
     
     // MARK: - Public Properties
     
@@ -34,10 +46,11 @@ final class UserManager {
     
     // MARK: - Initialization
     
-    static let shared = UserManager()
-    private init() { }
+    init() {
+        
+    }
     
-    // MARK: - Public Helpers
+    // MARK: - Public Interface
     
     func login(apiKey: String) {
         self.apiKey = apiKey

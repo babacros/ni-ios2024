@@ -8,11 +8,11 @@
 import SwiftUI
 
 final class PlaygroundListViewController: UIViewController {
-    private let viewModel: PlaygroundListViewModel
+    private var viewModel: PlaygroundListViewModeling
     
     // MARK: - Initialization
     
-    init(viewModel: PlaygroundListViewModel) {
+    init(viewModel: PlaygroundListViewModeling) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -43,7 +43,7 @@ final class PlaygroundListViewController: UIViewController {
 
 extension PlaygroundListViewController: PlaygroundListFlowDelegate {
     func onDetail(playground: Playground) {
-        let vc = PlaygroundDetailViewController(viewModel: .init(playground: playground))
+        let vc = PlaygroundDetailViewController(viewModel: PlaygroundDetailViewModel(playground: playground))
         navigationController?.pushViewController(vc, animated: true)
     }
 }

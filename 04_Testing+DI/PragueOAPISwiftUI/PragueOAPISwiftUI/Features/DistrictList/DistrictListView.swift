@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DistrictListView: View {
-    @State var viewModel: DistrictListViewModel
+    @State var viewModel: DistrictListViewModeling
     
     // MARK: - Body
     

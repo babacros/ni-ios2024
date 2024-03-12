@@ -8,12 +8,14 @@
 import SwiftUI
 
 final class ProfileViewController: UIViewController {
-    let viewModel: ProfileViewModel
+    let viewModel: ProfileViewModeling
     
     // MARK: - Initialization
     
     init() {
-        self.viewModel = ProfileViewModel()
+        self.viewModel = ProfileViewModel(
+            userManager: UserManager()
+        )
         super.init(nibName: nil, bundle: nil)
     }
     

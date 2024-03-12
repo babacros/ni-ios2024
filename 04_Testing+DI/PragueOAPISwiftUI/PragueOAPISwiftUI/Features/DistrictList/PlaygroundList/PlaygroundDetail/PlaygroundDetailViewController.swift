@@ -8,11 +8,11 @@
 import SwiftUI
 
 final class PlaygroundDetailViewController: UIViewController {
-    private let viewModel: PlaygroundDetailViewModel
+    private var viewModel: PlaygroundDetailViewModeling
     
     // MARK: - Initialization
     
-    init(viewModel: PlaygroundDetailViewModel) {
+    init(viewModel: PlaygroundDetailViewModeling) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }

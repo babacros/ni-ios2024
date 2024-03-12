@@ -7,18 +7,21 @@
 
 import Foundation
 
-final class Network {
+protocol Networking {
+    func performRequest(
+        url: URL,
+        httpMethod: Network.HTTPMethod,
+        headers: [String: String]
+    ) async throws -> Data
+}
+
+final class Network: Networking {
     static let acceptJSONHeader = ["accept": "application/json; charset=utf-8"]
     var apiKeyHeader: [String: String] {
         ["X-Access-Token": UserDefaults.standard.string(forKey: "apiKey") ?? ""]
     }
     
-    // MARK: - Initialization
-    
-    static let shared = Network()
-    private init() { }
-    
-    // MARK: - Public Helpers
+    // MARK: - Public Interface
     
     func performRequest(
         url: URL,
