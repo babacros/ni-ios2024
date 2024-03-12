@@ -32,7 +32,9 @@ final class DistrictListViewModelTests: XCTestCase {
             id: 17,
             slug: "praha-6"
         )
+        let currentLocation = CLLocationCoordinate2D(latitude: 50.10496, longitude: 14.38957)
         
+        locationManager.currentLocationReturnValue = currentLocation
         districtAPIService.districtsReturnValue = [
             district
         ]
@@ -46,12 +48,6 @@ final class DistrictListViewModelTests: XCTestCase {
             viewModel.districts.first,
             district
         )
-    }
-}
-
-final class LocationManagerMock: LocationManager {
-    override var currentLocation: CLLocationCoordinate2D {
-        .init(latitude: 50.10496, longitude: 14.38957)
     }
 }
 

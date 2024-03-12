@@ -8,7 +8,12 @@
 import Foundation
 import CoreLocation
 
-class LocationManager {
+protocol LocationManaging {
+    var currentLocation: CLLocationCoordinate2D { get }
+    func distanceFromCurrentLocation(for location: CLLocationCoordinate2D) -> Int
+}
+
+class LocationManager: LocationManaging {
     
     // MARK: - Public Properties
     
