@@ -46,9 +46,20 @@
 		97655DE52B9758670068CF9B /* PlaygroundDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DE42B9758670068CF9B /* PlaygroundDetailViewController.swift */; };
 		97655DE72B9758980068CF9B /* AddressMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DE62B9758980068CF9B /* AddressMapViewController.swift */; };
 		97655DE92B976B190068CF9B /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97655DE82B976B190068CF9B /* UserManager.swift */; };
+		97BEBD4F2BA07BE40078EAC3 /* PragueOAPISwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BEBD4E2BA07BE40078EAC3 /* PragueOAPISwiftUITests.swift */; };
 		97C408562B978AC200B30CD6 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C408552B978AC200B30CD6 /* Network.swift */; };
 		97C408582B97909300B30CD6 /* ParkingAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C408572B97909300B30CD6 /* ParkingAPIService.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		97BEBD502BA07BE40078EAC3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 973E01502B9380AC0095396F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 973E01572B9380AC0095396F;
+			remoteInfo = PragueOAPISwiftUI;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		971E6F2C2BA05F6A0044FE29 /* DistrictAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictAPIService.swift; sourceTree = "<group>"; };
@@ -92,12 +103,21 @@
 		97655DE42B9758670068CF9B /* PlaygroundDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaygroundDetailViewController.swift; sourceTree = "<group>"; };
 		97655DE62B9758980068CF9B /* AddressMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressMapViewController.swift; sourceTree = "<group>"; };
 		97655DE82B976B190068CF9B /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		97BEBD4C2BA07BE40078EAC3 /* PragueOAPISwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PragueOAPISwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		97BEBD4E2BA07BE40078EAC3 /* PragueOAPISwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PragueOAPISwiftUITests.swift; sourceTree = "<group>"; };
 		97C408552B978AC200B30CD6 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		97C408572B97909300B30CD6 /* ParkingAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingAPIService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		973E01552B9380AC0095396F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		97BEBD492BA07BE40078EAC3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -120,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				973E015A2B9380AC0095396F /* PragueOAPISwiftUI */,
+				97BEBD4D2BA07BE40078EAC3 /* PragueOAPISwiftUITests */,
 				973E01592B9380AC0095396F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -128,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				973E01582B9380AC0095396F /* PragueOAPISwiftUI.app */,
+				97BEBD4C2BA07BE40078EAC3 /* PragueOAPISwiftUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -308,6 +330,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		97BEBD4D2BA07BE40078EAC3 /* PragueOAPISwiftUITests */ = {
+			isa = PBXGroup;
+			children = (
+				97BEBD4E2BA07BE40078EAC3 /* PragueOAPISwiftUITests.swift */,
+			);
+			path = PragueOAPISwiftUITests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -328,6 +358,24 @@
 			productReference = 973E01582B9380AC0095396F /* PragueOAPISwiftUI.app */;
 			productType = "com.apple.product-type.application";
 		};
+		97BEBD4B2BA07BE40078EAC3 /* PragueOAPISwiftUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 97BEBD542BA07BE40078EAC3 /* Build configuration list for PBXNativeTarget "PragueOAPISwiftUITests" */;
+			buildPhases = (
+				97BEBD482BA07BE40078EAC3 /* Sources */,
+				97BEBD492BA07BE40078EAC3 /* Frameworks */,
+				97BEBD4A2BA07BE40078EAC3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				97BEBD512BA07BE40078EAC3 /* PBXTargetDependency */,
+			);
+			name = PragueOAPISwiftUITests;
+			productName = PragueOAPISwiftUITests;
+			productReference = 97BEBD4C2BA07BE40078EAC3 /* PragueOAPISwiftUITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -340,6 +388,10 @@
 				TargetAttributes = {
 					973E01572B9380AC0095396F = {
 						CreatedOnToolsVersion = 15.0;
+					};
+					97BEBD4B2BA07BE40078EAC3 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = 973E01572B9380AC0095396F;
 					};
 				};
 			};
@@ -357,6 +409,7 @@
 			projectRoot = "";
 			targets = (
 				973E01572B9380AC0095396F /* PragueOAPISwiftUI */,
+				97BEBD4B2BA07BE40078EAC3 /* PragueOAPISwiftUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -368,6 +421,13 @@
 			files = (
 				973E01632B9380AE0095396F /* Preview Assets.xcassets in Resources */,
 				973E01602B9380AE0095396F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		97BEBD4A2BA07BE40078EAC3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,7 +480,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		97BEBD482BA07BE40078EAC3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97BEBD4F2BA07BE40078EAC3 /* PragueOAPISwiftUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		97BEBD512BA07BE40078EAC3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 973E01572B9380AC0095396F /* PragueOAPISwiftUI */;
+			targetProxy = 97BEBD502BA07BE40078EAC3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		973E01642B9380AE0095396F /* Debug */ = {
@@ -598,6 +674,40 @@
 			};
 			name = Release;
 		};
+		97BEBD522BA07BE40078EAC3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cz.cvut.fit.PragueOAPISwiftUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PragueOAPISwiftUI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PragueOAPISwiftUI";
+			};
+			name = Debug;
+		};
+		97BEBD532BA07BE40078EAC3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cz.cvut.fit.PragueOAPISwiftUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PragueOAPISwiftUI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PragueOAPISwiftUI";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -615,6 +725,15 @@
 			buildConfigurations = (
 				973E01672B9380AE0095396F /* Debug */,
 				973E01682B9380AE0095396F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		97BEBD542BA07BE40078EAC3 /* Build configuration list for PBXNativeTarget "PragueOAPISwiftUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				97BEBD522BA07BE40078EAC3 /* Debug */,
+				97BEBD532BA07BE40078EAC3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
