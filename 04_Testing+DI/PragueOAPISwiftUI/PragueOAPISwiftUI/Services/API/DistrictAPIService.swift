@@ -8,8 +8,8 @@
 import Foundation
 import CoreLocation
 
-final class DistrictAPIService {
-    static func districts(
+class DistrictAPIService {
+    func districts(
         currentLocation: CLLocationCoordinate2D,
         offset: Int
     ) async throws -> [District] {
@@ -33,7 +33,7 @@ final class DistrictAPIService {
         return features?.features ?? []
     }
     
-    static func playgrounds(districtID: String) async throws -> [Playground] {
+    func playgrounds(districtID: String) async throws -> [Playground] {
         var url = Network.Endpoint.playgrounds.url
         let queryItems = [
             URLQueryItem(name: "districts", value: districtID),

@@ -13,7 +13,10 @@ final class DistrictListViewController: UIViewController {
     // MARK: - Initialization
     
     init() {
-        self.viewModel = DistrictListViewModel(locationManager: LocationManager())
+        self.viewModel = DistrictListViewModel(
+            locationManager: LocationManager(),
+            districtAPIService: DistrictAPIService()
+        )
         super.init(nibName: nil, bundle: nil)
     }
     

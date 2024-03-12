@@ -39,7 +39,7 @@ final class PlaygroundListViewModel {
             defer { isLoading = false }
             isLoading = true
             
-            self.playgrounds = try await DistrictAPIService.playgrounds(
+            self.playgrounds = try await DistrictAPIService().playgrounds(
                 districtID: districtID
             )
         }

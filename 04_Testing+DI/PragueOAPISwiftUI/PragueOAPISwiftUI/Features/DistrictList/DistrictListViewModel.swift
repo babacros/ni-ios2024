@@ -24,11 +24,16 @@ final class DistrictListViewModel {
     weak var delegate: DistrictListFlowDelegate?
     
     private let locationManager: LocationManager
+    private let districtAPIService: DistrictAPIService
     
     // MARK: - Initialization
     
-    init(locationManager: LocationManager) {
+    init(
+        locationManager: LocationManager,
+        districtAPIService: DistrictAPIService
+    ) {
         self.locationManager = locationManager
+        self.districtAPIService = districtAPIService
     }
     
     // MARK: - Helpers
@@ -67,7 +72,7 @@ final class DistrictListViewModel {
         defer { isLoading = false }
         isLoading = true
         
-        return try await DistrictAPIService.districts(
+        return try await districtAPIService.districts(
             currentLocation: locationManager.currentLocation,
             offset: offset
         )
