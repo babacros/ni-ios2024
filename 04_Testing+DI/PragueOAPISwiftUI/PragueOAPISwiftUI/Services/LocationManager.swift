@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-final class LocationManager {
+class LocationManager {
     
     // MARK: - Public Properties
     
@@ -19,9 +19,4 @@ final class LocationManager {
     func distanceFromCurrentLocation(for location: CLLocationCoordinate2D) -> Int {
         Int(currentLocation.clLocation.distance(from: location.clLocation))
     }
-    
-    // MARK: - Initialization
-    
-    private init() {}
-    static let shared = LocationManager()
 }

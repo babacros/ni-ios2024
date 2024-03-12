@@ -64,7 +64,7 @@ final class ParkingListViewModel {
             isLoading = true
             
             self.parkingPlaces = try await ParkingAPIService.parkingPlaces(
-                currentLocation: LocationManager.shared.currentLocation
+                currentLocation: LocationManager().currentLocation
             )
         }
     }

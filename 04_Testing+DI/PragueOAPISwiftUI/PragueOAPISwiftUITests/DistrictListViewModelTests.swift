@@ -7,11 +7,22 @@
 
 import XCTest
 @testable import PragueOAPISwiftUI
+import CoreLocation
 
 final class DistrictListViewModelTests: XCTestCase {
+    var viewModel: DistrictListViewModel!
+    var locationManager: LocationManagerMock!
+    
+    override func setUp() {
+        super.setUp()
+        
+        locationManager = LocationManagerMock()
+        viewModel = DistrictListViewModel(locationManager: locationManager)
+    }
+    
     func testFetchFirstPage() async throws {
         // Given
-        let viewModel = DistrictListViewModel()
+        
         
         // When
         try await viewModel.fetchFirstPage()
@@ -26,5 +37,11 @@ final class DistrictListViewModelTests: XCTestCase {
                 slug: "praha-6"
             )
         )
+    }
+}
+
+final class LocationManagerMock: LocationManager {
+    override var currentLocation: CLLocationCoordinate2D {
+        .init(latitude: 50.10496, longitude: 14.38957)
     }
 }

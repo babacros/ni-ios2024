@@ -46,6 +46,6 @@ final class PlaygroundListViewModel {
     }
     
     func distanceFromCurrentLocation(for location: CLLocationCoordinate2D) -> String {
-        String(LocationManager.shared.distanceFromCurrentLocation(for: location)) + "m"
+        String(LocationManager().distanceFromCurrentLocation(for: location)) + "m"
     }
 }
