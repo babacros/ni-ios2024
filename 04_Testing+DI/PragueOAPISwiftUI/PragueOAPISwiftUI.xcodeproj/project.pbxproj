@@ -54,6 +54,7 @@
 		97BEBD612BA088FA0078EAC3 /* LocationManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BEBD602BA088FA0078EAC3 /* LocationManagerMock.swift */; };
 		97BEBD632BA08BDD0078EAC3 /* DistrictAPIServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BEBD622BA08BDD0078EAC3 /* DistrictAPIServiceMock.swift */; };
 		97BEBD652BA098260078EAC3 /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BEBD642BA098260078EAC3 /* AppDependency.swift */; };
+		97BEBD672BA09FBC0078EAC3 /* AssertSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BEBD662BA09FBC0078EAC3 /* AssertSnapshot.swift */; };
 		97C408562B978AC200B30CD6 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C408552B978AC200B30CD6 /* Network.swift */; };
 		97C408582B97909300B30CD6 /* ParkingAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C408572B97909300B30CD6 /* ParkingAPIService.swift */; };
 /* End PBXBuildFile section */
@@ -119,6 +120,7 @@
 		97BEBD602BA088FA0078EAC3 /* LocationManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerMock.swift; sourceTree = "<group>"; };
 		97BEBD622BA08BDD0078EAC3 /* DistrictAPIServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictAPIServiceMock.swift; sourceTree = "<group>"; };
 		97BEBD642BA098260078EAC3 /* AppDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
+		97BEBD662BA09FBC0078EAC3 /* AssertSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssertSnapshot.swift; sourceTree = "<group>"; };
 		97C408552B978AC200B30CD6 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		97C408572B97909300B30CD6 /* ParkingAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingAPIService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -352,6 +354,7 @@
 				97BEBD4E2BA07BE40078EAC3 /* PragueOAPISwiftUITests.swift */,
 				97BEBD552BA07DA10078EAC3 /* ParkingPlaceTests.swift */,
 				97BEBD5A2BA07F9E0078EAC3 /* DistrictListViewModelTests.swift */,
+				97BEBD662BA09FBC0078EAC3 /* AssertSnapshot.swift */,
 			);
 			path = PragueOAPISwiftUITests;
 			sourceTree = "<group>";
@@ -531,6 +534,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				97BEBD612BA088FA0078EAC3 /* LocationManagerMock.swift in Sources */,
+				97BEBD672BA09FBC0078EAC3 /* AssertSnapshot.swift in Sources */,
 				97BEBD5B2BA07F9E0078EAC3 /* DistrictListViewModelTests.swift in Sources */,
 				97BEBD592BA07F200078EAC3 /* ParkingPlaceMock.swift in Sources */,
 				97BEBD562BA07DA10078EAC3 /* ParkingPlaceTests.swift in Sources */,
