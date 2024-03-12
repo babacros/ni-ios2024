@@ -55,6 +55,7 @@
 		97BEBD632BA08BDD0078EAC3 /* DistrictAPIServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BEBD622BA08BDD0078EAC3 /* DistrictAPIServiceMock.swift */; };
 		97BEBD652BA098260078EAC3 /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BEBD642BA098260078EAC3 /* AppDependency.swift */; };
 		97BEBD672BA09FBC0078EAC3 /* AssertSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BEBD662BA09FBC0078EAC3 /* AssertSnapshot.swift */; };
+		97BEBD6B2BA0A01D0078EAC3 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 97BEBD6A2BA0A01D0078EAC3 /* SnapshotTesting */; };
 		97C408562B978AC200B30CD6 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C408552B978AC200B30CD6 /* Network.swift */; };
 		97C408582B97909300B30CD6 /* ParkingAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C408572B97909300B30CD6 /* ParkingAPIService.swift */; };
 /* End PBXBuildFile section */
@@ -137,6 +138,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97BEBD6B2BA0A01D0078EAC3 /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,6 +160,7 @@
 				973E015A2B9380AC0095396F /* PragueOAPISwiftUI */,
 				97BEBD4D2BA07BE40078EAC3 /* PragueOAPISwiftUITests */,
 				973E01592B9380AC0095396F /* Products */,
+				97BEBD692BA0A01D0078EAC3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -386,6 +389,13 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		97BEBD692BA0A01D0078EAC3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -420,6 +430,9 @@
 				97BEBD512BA07BE40078EAC3 /* PBXTargetDependency */,
 			);
 			name = PragueOAPISwiftUITests;
+			packageProductDependencies = (
+				97BEBD6A2BA0A01D0078EAC3 /* SnapshotTesting */,
+			);
 			productName = PragueOAPISwiftUITests;
 			productReference = 97BEBD4C2BA07BE40078EAC3 /* PragueOAPISwiftUITests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -452,6 +465,9 @@
 				Base,
 			);
 			mainGroup = 973E014F2B9380AC0095396F;
+			packageReferences = (
+				97BEBD682BA0A00E0078EAC3 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
+			);
 			productRefGroup = 973E01592B9380AC0095396F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -795,6 +811,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		97BEBD682BA0A00E0078EAC3 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.15.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		97BEBD6A2BA0A01D0078EAC3 /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 97BEBD682BA0A00E0078EAC3 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 973E01502B9380AC0095396F /* Project object */;
 }
