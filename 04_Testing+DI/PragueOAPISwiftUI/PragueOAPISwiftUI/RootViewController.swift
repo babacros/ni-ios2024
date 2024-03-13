@@ -11,17 +11,6 @@ final class RootViewController: UIViewController {
     private weak var loginViewController: UINavigationController!
     private weak var tabBar: UITabBarController?
     
-    private var userManager: UserManaging
-    
-    init() {
-        userManager = UserManager()
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     // MARK: - Controller lifecycle
        
     override func loadView() {
@@ -44,7 +33,7 @@ final class RootViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
      
-        userManager.delegate = self
+        appDependencies.userManager.delegate = self
         
         updateAppState()
     }
@@ -52,7 +41,7 @@ final class RootViewController: UIViewController {
     // MARK: - Private helpers
     
     private func setupTabBar() {
-        guard tabBar == nil, userManager.isLoggedIn else { return }
+        guard tabBar == nil, appDependencies.userManager.isLoggedIn else { return }
         // MARK: DistrictList
         
         let districtListVC = DistrictListViewController()
@@ -98,7 +87,7 @@ final class RootViewController: UIViewController {
     }
     
     private func updateAppState() {
-        if userManager.isLoggedIn {
+        if appDependencies.userManager.isLoggedIn {
             loginViewController.view.isHidden = true
             tabBar?.view.isHidden = false
             tabBar?.selectedIndex = 0

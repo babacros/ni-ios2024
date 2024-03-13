@@ -52,7 +52,8 @@ extension DistrictListViewController: DistrictListFlowDelegate {
             viewModel: PlaygroundListViewModel(
                 districtID: districtID,
                 dependencies: .init(
-                    districtAPIService: appDependencies.districtAPIService
+                    districtAPIService: appDependencies.districtAPIService,
+                    locationManager: appDependencies.locationManager
                 )
             )
         )

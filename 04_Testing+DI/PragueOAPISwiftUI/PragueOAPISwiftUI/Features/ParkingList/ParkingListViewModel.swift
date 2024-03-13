@@ -29,9 +29,10 @@ protocol ParkingListViewModeling {
 
 @Observable
 final class ParkingListViewModel: ParkingListViewModeling {
-    struct Dependencies: HasUserManager, HasParkingAPIService {
+    struct Dependencies: HasUserManager, HasLocationManager, HasParkingAPIService {
         let userManager: UserManaging
         let parkingAPIService: ParkingAPIServicing
+        let locationManager: LocationManaging
     }
     
     private(set) var parkingPlaces: [ParkingPlace] = [] {
@@ -58,12 +59,14 @@ final class ParkingListViewModel: ParkingListViewModeling {
     weak var delegate: ParkingListDelegate?
     
     let userManager: UserManaging
+    private let locationManager: LocationManaging
     let parkingAPIService: ParkingAPIServicing
     
     // MARK: - Initialization
     
     init(dependencies: Dependencies) {
         userManager = dependencies.userManager
+        locationManager = dependencies.locationManager
         parkingAPIService = dependencies.parkingAPIService
     }
     
@@ -88,7 +91,7 @@ final class ParkingListViewModel: ParkingListViewModeling {
             isLoading = true
             
             self.parkingPlaces = try await parkingAPIService.parkingPlaces(
-                currentLocation: LocationManager().currentLocation
+                currentLocation: locationManager.currentLocation
             )
         }
     }

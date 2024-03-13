@@ -27,8 +27,9 @@ protocol PlaygroundListViewModeling {
 
 @Observable
 final class PlaygroundListViewModel: PlaygroundListViewModeling {
-    struct Dependencies: HasDistrictAPIService {
+    struct Dependencies: HasDistrictAPIService, HasLocationManager {
         let districtAPIService: DistrictAPIServicing
+        let locationManager: LocationManaging
     }
     
     private let districtID: String
@@ -39,6 +40,7 @@ final class PlaygroundListViewModel: PlaygroundListViewModeling {
     weak var delegate: PlaygroundListFlowDelegate?
     
     private let districtAPIService: DistrictAPIServicing
+    private let locationManager: LocationManaging
     
     // MARK: - Initialization
     
@@ -48,6 +50,7 @@ final class PlaygroundListViewModel: PlaygroundListViewModeling {
     ) {
         self.districtID = districtID
         districtAPIService = dependencies.districtAPIService
+        locationManager = dependencies.locationManager
     }
     
     // MARK: - Public Interface
@@ -68,6 +71,6 @@ final class PlaygroundListViewModel: PlaygroundListViewModeling {
     }
     
     func distanceFromCurrentLocation(for location: CLLocationCoordinate2D) -> String {
-        String(LocationManager().distanceFromCurrentLocation(for: location)) + "m"
+        String(locationManager.distanceFromCurrentLocation(for: location)) + "m"
     }
 }

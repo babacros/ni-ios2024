@@ -16,7 +16,8 @@ final class ParkingListViewController: UIViewController {
         self.viewModel = ParkingListViewModel(
             dependencies: .init(
                 userManager: appDependencies.userManager,
-                parkingAPIService: appDependencies.parkingAPIService
+                parkingAPIService: appDependencies.parkingAPIService,
+                locationManager: appDependencies.locationManager
             )
         )
         super.init(nibName: nil, bundle: nil)
