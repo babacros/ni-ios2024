@@ -9,7 +9,7 @@ import Foundation
 import CoreLocation
 
 extension URLQueryItem {
-    static func range(_ value: Int = 5000) -> URLQueryItem {
+    static func range(_ value: Int = 50000) -> URLQueryItem {
         .init(name: "range", value: String(value))
     }
     
